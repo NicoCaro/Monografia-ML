@@ -3,7 +3,8 @@
 \chapter{Modelos gráficos probabilísticos}
 
 \begin{quotation}
-	El \textit{machine learning} fue un objeto de lujo, pero para nosotros es un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
+	El \textit{machine learning} fue un objeto de lujo, pero para nosotros es
+    un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
 	\todo{Poner algo profundo por el estilo. (?)}
 \end{quotation}
 
@@ -62,7 +63,9 @@ relaciones de dependencia condicional subyacentes.
 \subfloat[]{\label{fig:grafo_ejemplo}\input{./figuras/grafo_ejemplo}}
 \quad
 \subfloat[]{\label{fig:naive_bayes} \input{./figuras/naive_bayes_graph}}
-\caption{\subref{fig:grafo_ejemplo} Ejemplo de modelo gráfico dirigido. \subref{fig:naive_bayes} Relaciones de dependencia condicional en el clasificador naive Bayes como un modelo gráfico dirigido.}
+\caption{\subref{fig:grafo_ejemplo} Ejemplo de modelo gráfico dirigido.
+\subref{fig:naive_bayes} Relaciones de dependencia condicional en el clasificador
+ naive Bayes como un modelo gráfico dirigido.}
 \end{figure}
 \begin{figure}[ht]
 \centering
@@ -113,10 +116,12 @@ $x_t$. En este caso, no hay aristas incidentes hacia $x_1$, $x_2$ ni $x_3$. Por 
 deben crear aristas desde $x_1, x_2$ y $x_3$ hacia $x_4$, desde $x_1$ y $x_3$ hacia $x_5$ y
 desde $x_4, x_5$ hacia $x_6$.
 
-En general, es posible reconstruir la probabilidad conjunta subyacente a un modelo gráfico probabilístico conociendo el grafo y haciendo el proceso inverso al descrito anteriormente.
+En general, es posible reconstruir la probabilidad conjunta subyacente a un modelo
+ gráfico probabilístico conociendo el grafo y haciendo el proceso inverso al descrito anteriormente.
 \end{example}
 
-Con el fin de explorar las posibilidades de este tipo de modelos e introducir conceptos referentes a la notación de estos, se pasan a estudiar los siguientes ejemplos:
+Con el fin de explorar las posibilidades de este tipo de modelos e introducir conceptos
+ referentes a la notación de estos, se pasan a estudiar los siguientes ejemplos:
 
 \subsection{Naive Bayes}
 \index{Naive Bayes}
@@ -136,7 +141,8 @@ Si se usa este enfoque, se obtiene que la densidad condicional de clases toma la
 \end{equation}
 
 Al parametrizar las distribuciones de densidad condicional, es posible obtener un modelo de
-clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificador naive Bayes}. La estructura de las relaciones de independencia inducidas por (\ref{eq:cond_nb}) se pueden
+clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificador naive Bayes}.
+ La estructura de las relaciones de independencia inducidas por (\ref{eq:cond_nb}) se pueden
 expresar según (\ref{eq:naive_bayes}) y el modelo gráfico dirigido de la figura \ref{fig:naive_bayes}.
 
 
@@ -144,20 +150,22 @@ expresar según (\ref{eq:naive_bayes}) y el modelo gráfico dirigido de la figur
 
 \subsection{Modelos gráficos dirigidos gaussianos}
 
-Sea $\mathcal{M}$ un modelo grafico dirigido, en el cual todas las variables son reales y sus distribuciones de probabilidad
-condicional son lineal-gaussianas:
+Sea $\mathcal{M}$ un modelo grafico dirigido, en el cual todas las variables son
+reales y sus distribuciones de probabilidad condicional son lineal-gaussianas:
 \begin{equation}
 	\label{eq:gaussian_cpd}
 	p(x_t ~ | ~ \bm x_{pa(t)}) = \mathcal{N}(x_t ~ | ~ \mu_t + \bm w_{t}^T \bm x_{pa(t)}, \sigma_t^2)
 \end{equation}
 
-La estructura de $\mathcal{M}$ permite modelar la probabilidad conjunta de las variables del modelo en la forma:
+La estructura de $\mathcal{M}$ permite modelar la probabilidad conjunta de las
+variables del modelo en la forma:
 \begin{equation}
 	\label{eq:ver_red_bayesiana_gaussiana}
 	p(\bm x ~ | ~ \mathcal{M}) = \prod_{t=1}^{V} p(x_t ~ | ~ \bm x_{pa(t)}) =  \mathcal{N}(\bm x ~ | ~ \bm \mu , \Sigma)
 \end{equation}
 
-Lo cual se conoce como \index{red bayesiana gaussiana} \textbf{red bayesiana gaussiana}. Para este tipo de modelos, es posible inferir
+Lo cual se conoce como \index{red bayesiana gaussiana} \textbf{red bayesiana gaussiana}.
+Para este tipo de modelos, es posible inferir
 $\bm \mu$ y $ \bm \Sigma$. En efecto, según (\ref{eq:ver_red_bayesiana_gaussiana}):
 \begin{equation}
 	\label{eq:log_gaussian_cpd}
@@ -174,12 +182,16 @@ probabilidad conjunta es normal multivariada para  $\bm x$ en
 	x_t = \sum_{s \in pa(t)} w_{ts} \mathbb{E}[x_s] + \mu_t + \sigma_t \varepsilon_t
 \end{equation}
 
-Donde $\varepsilon_t \sim \mathcal{N}(0,1)$ y $\mathbb{E}[\varepsilon_t, \varepsilon_s] =  0 $, para $s \neq t$. De esto se deduce:
+Donde $\varepsilon_t \sim \mathcal{N}(0,1)$ y $\mathbb{E}[\varepsilon_t, \varepsilon_s] =  0 $,
+para $s \neq t$. De esto se deduce:
 \begin{equation}
 \label{eq:E_x_2}
 \mathbb{E}[x_t] = \sum_{s \in pa(t)} w_{ts} \mathbb{E}[x_s] + \mu_t
 \end{equation}
 
-Es posible entonces, encontrar de manera recursiva las componentes de $\mathbb{E}[\bm x] =(\mathbb{E}[x_1], \ldots, \mathbb{E}[x_V])^T$ utilizando la estructura gráfica de $\mathcal{M}$. Para ello, se comienza calculando $\mathbb{E}[x_1]$ para luego continuar
+Es posible entonces, encontrar de manera recursiva las componentes de $\mathbb{E}[\bm x]
+=(\mathbb{E}[x_1], \ldots, \mathbb{E}[x_V])^T$ utilizando la estructura gráfica
+de $\mathcal{M}$. Para ello, se comienza calculando $\mathbb{E}[x_1]$ para luego continuar
+
 \section{Modelos gráficos no dirigidos}
 \section{Inferencia exacta en modelos gráficos}
