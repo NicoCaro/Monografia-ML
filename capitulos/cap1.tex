@@ -1,0 +1,185 @@
+% !TEX root = ../main.tex
+\documentclass[../main.tex]{subfiles}
+\chapter{Modelos gráficos probabilísticos}
+
+\begin{quotation}
+	El \textit{machine learning} fue un objeto de lujo, pero para nosotros es un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
+	\todo{Poner algo profundo por el estilo. (?)}
+\end{quotation}
+
+\section*{Introducción}
+
+El eje central de este capitulo se basa en la búsqueda de una representación compacta, para
+distribuciones de probabilidad conjunta de la forma $p(\bm x \ | \ \bm\theta)$. Esto, con
+la intención de realizar inferencia sobre variables y aprendizaje de parámetros de manera
+eficiente
+
+
+\section{Modelos gráficos dirigidos}
+Toda distribución de probabilidad conjunta $p(\bm x ) = p(x_1, x_2, \ldots x_v)$  se puede
+representar de la forma:
+\begin{equation}
+	\label{eq:regla_cadena}
+	p(\bm x ) = p(x_1)p(x_2 \ \vline \ x_1 )p(x_3 \ \vline\  x_1, x_2) \ldots p(x_v\ \vline\  x_1, x_2, \ldots , x_{v-1})
+\end{equation}
+
+\todo{Agregar discusión sobre computabilidad. (?) (ref: Murphy, pg. 307)}
+El problema con esta expresión es la dificultad computacional subyacente al cálculo de
+distribuciones condicionales de la forma $p(x_{t} \ \vline \  x_1,\ldots, x_{t-1} )$
+cuando el número de variables incidentes $t$ aumenta.
+
+\todo{Agregar propiedades básicas del calculo de probabilidades (CI por ej.) al apéndice.}
+No obstante, la representación (\ref{eq:regla_cadena}) reduce su complejidad en presencia de
+\index{independencia condicional} \textbf{independencia condicional}.
+
+En efecto, si se asume $x_{t+1} \perp  x_{1}, \ldots, x_{t-1} \ \vline \ x_t$. Es decir,
+las observaciones futuras $x_{t+1}$ son independientes del pasado $ x_{1}, \ldots,
+x_{t-1}$, dado el estado presente $x_{t}$. La probabilidad conjunta se reduce entonces a:
+\begin{equation}
+\label{eq:markov_prop}
+p(\bm x ) = p(x_1) \prod_{t = 2}^{v} p(x_t \ |\  x_1,\ldots , x_{t-1}) = p(x_1) \prod_{t = 2}^{v} p(x_t \ |\ x_{t-1})
+\end{equation}
+
+De lo cual se obtiene una expresión más simple.
+
+Modelar la independencia condicional entre las variables permite entonces reducir la
+complejidad de representación para la distribución conjunta. En particular, la elección tomada
+en (\ref{eq:markov_prop}) se conoce como \index{Propiedad de Markov} \textbf{propiedad de
+Markov} de primer orden.
+
+En un contexto general, las relaciones de independencia condicional entre variables aleatorias
+de dimensión arbitraria, se modelan utilizando \index{Diagramas de
+independencia}\textit{diagramas de independencia} o \index{Modelos gráficos}\textbf{modelos
+gráficos}. Estos se valen de un grafo $G=(\mathcal{V}, \mathcal{E})$ \footnote{Conjunto
+consistente de $\mathcal{V} = \lbrace{1 \ldots , V} \rbrace$ vértices (o nodos) y $\mathcal{E} =
+\lbrace {(s,t): s,t \in \mathcal{V}} \rbrace$ aristas.} para
+representar mediante nodos $v = 1, \ldots, \mathcal{V}$ las variables aleatorias del modelo,
+mientras que la presencia o ausencia de aristas entre estos nodos, permite modelar las
+relaciones de dependencia condicional subyacentes.
+% Naive Bayes Classifier
+\begin{figure}[ht]
+\centering
+\subfloat[]{\label{fig:grafo_ejemplo}\input{./figuras/grafo_ejemplo}}
+\quad
+\subfloat[]{\label{fig:naive_bayes} \input{./figuras/naive_bayes_graph}}
+\caption{\subref{fig:grafo_ejemplo} Ejemplo de modelo gráfico dirigido. \subref{fig:naive_bayes} Relaciones de dependencia condicional en el clasificador naive Bayes como un modelo gráfico dirigido.}
+\end{figure}
+\begin{figure}[ht]
+\centering
+\subfloat[]{\label{fig:plate_naive_bayes} \input{./figuras/plate_naive_bayes_graph}}
+\caption{\subref{fig:plate_naive_bayes} Clasificador naive Bayes con notación de placas.}
+
+\end{figure}
+Una \index{Red bayesiana} \textit{red bayesiana} o \index{modelo gráfico dirigido}\textbf{modelo
+gráfico dirigido} es un modelo gráfico probabilístico, cuyo grafo subyacente es un \index{grafo
+dirigido acíclico} \textbf{grafo dirigido acíclico} (\index{DAG}DAG por sus siglas en ingles).
+Todo DAG posee un \index{ordenamiento topológico} \textit{ordenamiento topológico}, es decir,
+los nodos de cualquier DAG pueden ser numerados de manera tal, que todo nodo padre
+posea una numeración inferior a sus nodos hijos. \todo{Agregar lemma de ordenamiento topologico
+para DAG's en apendice.} Esta característica permite enriquecer la formulación de la propiedad
+de Markov (\ref{eq:markov_prop}), usando la estructura grafica como componente adicional. De
+esta forma, se puede formular la \index{propiedad ordenada de Markov} \textbf{propiedad ordenada
+de Markov} en modelos gráficos dirigidos:
+\begin{equation}
+	\label{eq:Markov_ordenado}
+	x_s \perp \bm x_{pred(s) \setminus pa(s)} ~ | ~ \bm x_{pa(s)}
+\end{equation}
+
+Es decir, un nodo $x_s$ es independiente de aquellos predecesores, menores en orden topológico,
+a sus padres $ \bm x_{pred(s) \setminus pa(s)}$, dados sus nodos padres $\bm x_{pa(s)}$. De
+manera equivalente, un nodo $x_s$ solo depende de sus padres inmediatos $x_{pa(s)}$ y no de
+todos sus predecesores.
+
+De esta forma, la probabilidad conjunta de un modelo gráfico dirigido, que cumple la propiedad
+ordenada de Markov, se puede descomponer de la forma:
+\begin{equation}
+\label{eq:markov_prop_ord}
+p(\bm x ) = \prod_{t = 1}^{V} p(x_t \ |\  \bm x_{pa(t)})
+\end{equation}
+
+\begin{example}[Modelo grafico asociado a $p(\bm x)$]
+Si se estudia un modelo probabilístico, donde la probabilidad conjunta de las variables
+estudiadas $p(\bm x)$ esta dada por:
+\begin{equation}
+\label{eq:conj_grafo_ejemplo}
+p(\bm x) = p(x_1)p(x_2)p(x_3)p(x_4 | x_1, x_2, x_3)p(x_5 | x_1, x_3)p(x_6 | x_4, x_5)
+\end{equation}
+
+Entonces, un grafo dirigido asociado a tal factorización es el de la figura
+\ref{fig:grafo_ejemplo}. Para construir dicho grafo, se consideran las relaciones de
+independencia condicional en la factorización (\ref{eq:conj_grafo_ejemplo}), para luego
+establecer aristas $s \rightarrow t$ si la probabilidad condicional del nodo $x_s$ depende de
+$x_t$. En este caso, no hay aristas incidentes hacia $x_1$, $x_2$ ni $x_3$. Por otra parte, se
+deben crear aristas desde $x_1, x_2$ y $x_3$ hacia $x_4$, desde $x_1$ y $x_3$ hacia $x_5$ y
+desde $x_4, x_5$ hacia $x_6$.
+
+En general, es posible reconstruir la probabilidad conjunta subyacente a un modelo gráfico probabilístico conociendo el grafo y haciendo el proceso inverso al descrito anteriormente.
+\end{example}
+
+Con el fin de explorar las posibilidades de este tipo de modelos e introducir conceptos referentes a la notación de estos, se pasan a estudiar los siguientes ejemplos:
+
+\subsection{Naive Bayes}
+\index{Naive Bayes}
+
+Dado un problema de clasificación de vectores $\bm x = (x_1, \ldots , x_V)$ en $C$ clases. Es
+posible modelar las variables de decisión $x_t$ como condicionalmente independientes dada la
+categoría de clasificación:
+\begin{equation}
+	\label{eq:cond_nb}
+	x_i \perp x_j ~| y =  c, ~~ i \neq j
+\end{equation}
+
+Si se usa este enfoque, se obtiene que la densidad condicional de clases toma la forma:
+\begin{equation}
+	\label{eq:naive_bayes}
+	p(\bm x ~ | y = c) = \prod_{t=1}^{V}p(x_t ~ | y = c)
+\end{equation}
+
+Al parametrizar las distribuciones de densidad condicional, es posible obtener un modelo de
+clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificador naive Bayes}. La estructura de las relaciones de independencia inducidas por (\ref{eq:cond_nb}) se pueden
+expresar según (\ref{eq:naive_bayes}) y el modelo gráfico dirigido de la figura \ref{fig:naive_bayes}.
+
+
+\subsection{Regresión polinomial}
+
+\subsection{Modelos gráficos dirigidos gaussianos}
+
+Sea $\mathcal{M}$ un modelo grafico dirigido, en el cual todas las variables son reales y sus distribuciones de probabilidad
+condicional son lineal-gaussianas:
+\begin{equation}
+	\label{eq:gaussian_cpd}
+	p(x_t ~ | ~ \bm x_{pa(t)}) = \mathcal{N}(x_t ~ | ~ \mu_t + \bm w_{t}^T \bm x_{pa(t)}, \sigma_t^2)
+\end{equation}
+
+La estructura de $\mathcal{M}$ permite modelar la probabilidad conjunta de las variables del modelo en la forma:
+\begin{equation}
+	\label{eq:ver_red_bayesiana_gaussiana}
+	p(\bm x ~ | ~ \mathcal{M}) = \prod_{t=1}^{V} p(x_t ~ | ~ \bm x_{pa(t)}) =  \mathcal{N}(\bm x ~ | ~ \bm \mu , \Sigma)
+\end{equation}
+
+Lo cual se conoce como \index{red bayesiana gaussiana} \textbf{red bayesiana gaussiana}. Para este tipo de modelos, es posible inferir
+$\bm \mu$ y $ \bm \Sigma$. En efecto, según (\ref{eq:ver_red_bayesiana_gaussiana}):
+\begin{equation}
+	\label{eq:log_gaussian_cpd}
+	 \log p( \bm x ~ | ~ \mathcal{M}) = - \sum_{t = 1}^{V} \frac{1}{2\sigma_t^2} \left(
+	 x_t - \sum_{s \in pa(t)} w_{ts}  x_s - \mu_t	 \right)^2 + K
+\end{equation}
+
+Donde $K$ representa una constante independiente de de $\bm x$. Al ser la log-probabilidad
+conjunta, cuadrática en las componentes de $\bm x$, se obtiene que efectivamente la
+probabilidad conjunta es normal multivariada para  $\bm x$ en
+(\ref{eq:ver_red_bayesiana_gaussiana}). Para estimar la media, se observa en primera instancia:
+\begin{equation}
+	\label{eq:E_x}
+	x_t = \sum_{s \in pa(t)} w_{ts} \mathbb{E}[x_s] + \mu_t + \sigma_t \varepsilon_t
+\end{equation}
+
+Donde $\varepsilon_t \sim \mathcal{N}(0,1)$ y $\mathbb{E}[\varepsilon_t, \varepsilon_s] =  0 $, para $s \neq t$. De esto se deduce:
+\begin{equation}
+\label{eq:E_x_2}
+\mathbb{E}[x_t] = \sum_{s \in pa(t)} w_{ts} \mathbb{E}[x_s] + \mu_t
+\end{equation}
+
+Es posible entonces, encontrar de manera recursiva las componentes de $\mathbb{E}[\bm x] =(\mathbb{E}[x_1], \ldots, \mathbb{E}[x_V])^T$ utilizando la estructura gráfica de $\mathcal{M}$. Para ello, se comienza calculando $\mathbb{E}[x_1]$ para luego continuar
+\section{Modelos gráficos no dirigidos}
+\section{Inferencia exacta en modelos gráficos}

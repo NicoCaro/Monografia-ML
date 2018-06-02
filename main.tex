@@ -1,0 +1,90 @@
+\documentclass{amsbook}
+
+% Librerias Personales
+
+\usepackage{subfiles} % Documento modular
+\usepackage[utf8]{inputenc} % Acentos simples
+\usepackage{bm} % Simbolos matematicos en negrita
+\usepackage{todonotes} % Notas
+
+% Modelos Graficos
+\usepackage{tikz}
+
+% Sub-figuras
+\usepackage[format=hang,singlelinecheck=0,font={sf,small},labelfont=normal]{subfig}
+\captionsetup[subfigure]{subrefformat=simple,labelformat=simple,listofformat=subsimple,justification=centering} %
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\usepackage{etoolbox}
+\robustify{\subref}
+
+% Teoremas
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{xca}[theorem]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\numberwithin{section}{chapter}
+\numberwithin{equation}{chapter}
+
+% Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+
+%    Blank box placeholder for figures (to avoid requiring any
+%    particular graphics capabilities for printing this document).
+\newcommand{\blankbox}[2]{%
+  \parbox{\columnwidth}{\centering
+%    Set fboxsep to 0 so that the actual size of the box will match the
+%    given measurements more closely.
+    \setlength{\fboxsep}{0pt}%
+    \fbox{\raisebox{0pt}[#2]{\hspace{#1}}}%
+  }%
+}
+
+% Insertar figura dummy
+\newcommand{\dummyfig}[1]{%
+\begin{figure}[tb]
+	\blankbox{.6\columnwidth}{5pc}
+	\caption{#1.}
+\end{figure}
+}
+
+% Inclusion especifica de secciones para debug.
+% \includeonly{preface,chap1,biblio,index}
+
+
+\begin{document}
+\frontmatter
+\title{Monografía sobre Aprendizaje Automático}
+
+%    Information for first author
+\author{Nicolás Caro}
+%    Address of record for the research reported here
+\address{Departamento de Ingenieria Matematica, Universidad de Chile, Santiago.}
+\email{ncaro@dim.uchile.cl}
+
+\maketitle
+
+\setcounter{page}{4}
+\tableofcontents
+
+\subfile{./misc/preface}
+
+\mainmatter
+\subfile{./capitulos/cap1}
+\subfile{./capitulos/cap2}
+\subfile{./capitulos/cap3}
+\subfile{./capitulos/cap4}
+\subfile{./capitulos/cap5}
+
+
+\backmatter
+\subfile{./misc/biblio}
+\subfile{./misc/index}
+
+\end{document}
