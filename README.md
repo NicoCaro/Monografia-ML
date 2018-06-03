@@ -15,5 +15,3 @@ tratados comprenden:
 
 Se esta viendo la posibilidad de incluir un **Capitulo 0** sobre modelos de Markov
 y probabilidad.
-
-Para contribuir contactarse a ncaro@dim.uchile.cl
