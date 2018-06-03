@@ -15,3 +15,5 @@ tratados comprenden:
 
 Se esta viendo la posibilidad de incluir un **Capitulo 0** sobre modelos de Markov
 y probabilidad.
+
+Toda contribución es bienvenida :)
