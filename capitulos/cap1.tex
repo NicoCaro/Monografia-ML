@@ -1,9 +1,11 @@
 % !TEX root = ../main.tex
+%!TeX spellcheck = es-CL
+
 \documentclass[../main.tex]{subfiles}
 \chapter{Modelos gráficos probabilísticos}
 
 \begin{quotation}
-	El \textit{machine learning} fue un objeto de lujo, pero para nosotros es
+    El \textit{machine learning} fue un objeto de lujo, pero para nosotros es
     un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
 	\todo{Poner algo profundo por el estilo. (?)}
 \end{quotation}
@@ -65,21 +67,17 @@ relaciones de dependencia condicional subyacentes.
 \subfloat[]{\label{fig:naive_bayes} \input{./figuras/naive_bayes_graph}}
 \caption{\subref{fig:grafo_ejemplo} Ejemplo de modelo gráfico dirigido.
 \subref{fig:naive_bayes} Relaciones de dependencia condicional en el clasificador
- naive Bayes como un modelo gráfico dirigido.}
+ naive Bayes como un modelo gráfico dirigido, las variables aleatorias observadas
+ se denotan por nodos grises.}
 \end{figure}
-\begin{figure}[ht]
-\centering
-\subfloat[]{\label{fig:plate_naive_bayes} \input{./figuras/plate_naive_bayes_graph}}
-\caption{\subref{fig:plate_naive_bayes} Clasificador naive Bayes con notación de placas.}
 
-\end{figure}
 Una \index{Red bayesiana} \textit{red bayesiana} o \index{modelo gráfico dirigido}\textbf{modelo
 gráfico dirigido} es un modelo gráfico probabilístico, cuyo grafo subyacente es un \index{grafo
 dirigido acíclico} \textbf{grafo dirigido acíclico} (\index{DAG}DAG por sus siglas en ingles).
 Todo DAG posee un \index{ordenamiento topológico} \textit{ordenamiento topológico}, es decir,
 los nodos de cualquier DAG pueden ser numerados de manera tal, que todo nodo padre
-posea una numeración inferior a sus nodos hijos. \todo{Agregar lemma de ordenamiento topologico
-para DAG's en apendice.} Esta característica permite enriquecer la formulación de la propiedad
+posea una numeración inferior a sus nodos hijos. \todo{Agregar lema de ordenamiento topológico
+para DAG's en apéndice.} Esta característica permite enriquecer la formulación de la propiedad
 de Markov (\ref{eq:markov_prop}), usando la estructura grafica como componente adicional. De
 esta forma, se puede formular la \index{propiedad ordenada de Markov} \textbf{propiedad ordenada
 de Markov} en modelos gráficos dirigidos:
@@ -117,7 +115,8 @@ deben crear aristas desde $x_1, x_2$ y $x_3$ hacia $x_4$, desde $x_1$ y $x_3$ ha
 desde $x_4, x_5$ hacia $x_6$.
 
 En general, es posible reconstruir la probabilidad conjunta subyacente a un modelo
- gráfico probabilístico conociendo el grafo y haciendo el proceso inverso al descrito anteriormente.
+gráfico probabilístico conociendo el grafo y haciendo el proceso inverso al descrito
+anteriormente.
 \end{example}
 
 Con el fin de explorar las posibilidades de este tipo de modelos e introducir conceptos
@@ -145,8 +144,53 @@ clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificado
  La estructura de las relaciones de independencia inducidas por (\ref{eq:cond_nb}) se pueden
 expresar según (\ref{eq:naive_bayes}) y el modelo gráfico dirigido de la figura \ref{fig:naive_bayes}.
 
-
 \subsection{Regresión polinomial}
+
+las variables aleatorias son el vector de coeficientes polinomiales $\bm w$ y los
+datos observados $\bm y = (y_1 , \ldots , y_N)^{T}$. Adicionalmente, se parametriza
+el ruido del modelo a través de $\sigma_{\varepsilon}^2$ y la varianza de la distribución
+a priori \footnote{Considerándose una distribución a priori, gaussiana y esférica sobre $\bm w$.}
+de $\bm w$ por $\sigma_w^2$. Finalmente, los datos de entrada se denotan por $\bm x = (x_1 , \ldots , x_N)^{T}$.
+
+La probabilidad conjunta de este modelo es el producto de la probabilidad
+a priori $p(\bm w)$ con las distribuciones condicionales $p(y_i  |  \bm w)$
+para $i = 1, \ldots, N$:
+\begin{equation}
+    \label{eq:poly_fact_1}
+ p(\bm y, \bm w ) = p(\bm w) \prod_{i = 1}^{N} p(y_i \ |\ \bm w)
+\end{equation}
+
+El grafo de tal factorización es similar al del clasificador naive Bayes \ref{fig:naive_bayes}.
+Para representarlo de manera compacta, se usa la notación de de placas o \textit{plates},
+en la figura \ref{fig:plate_poly_graph} se muestra el grafo de (\ref{eq:poly_fact_1})
+usando esta convención. Aquí $N$ es la cantidad de nodos del modelo, de los cuales se muestra
+el representante $y_i$.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[]{\label{fig:plate_poly_graph} \input{./figuras/plate_poly_graph}}
+    \caption{\subref{fig:plate_poly_graph} Clasificador naive Bayes con notación de placas.}
+
+    \centering
+    \subfloat[]{\label{fig:plate_poly_graph_2} \input{./figuras/plate_poly_graph_2}}
+    \caption{\subref{fig:plate_poly_graph_2} Clasificador naive Bayes con notación de placas.}
+
+\end{figure}
+
+Si por otra parte, si se quiere estudiar la interacción de los parametros en el modelo,
+es posible explicitarlos en la probabilidad conjunta para luego agregarlos al grafo:
+\begin{equation}
+\label{poly_fact_2}
+p(\bm y, \bm w | \bm x, \sigma_\varepsilon^2, \sigma_w^2 ) =
+p(\bm w | \sigma_w^2) \prod_{i = 1}^{N} p(y_i | \bm w, x_i, \sigma_\varepsilon^2)
+\end{equation}
+
+La figura \ref{fig:plate_poly_graph_2} muestra el grafo correspondiente a \ref{poly_fact_2}.
+Por convención, las variables deterministicas se incluyen en el grafo como circulos
+pequeños, mientras que las variables aleatorias observadas se muestran como nodos grises,
+los nodos incloloros representan variables latentes o no observadas, finalemnte las
+aristas, al igual que en los ejemplos anteriores, represetan la dependecia condicional
+en la factorización de la probabilidad conjunta.
 
 \subsection{Modelos gráficos dirigidos gaussianos}
 
@@ -154,7 +198,7 @@ Sea $\mathcal{M}$ un modelo grafico dirigido, en el cual todas las variables son
 reales y sus distribuciones de probabilidad condicional son lineal-gaussianas:
 \begin{equation}
 	\label{eq:gaussian_cpd}
-	p(x_t ~ | ~ \bm x_{pa(t)}) = \mathcal{N}(x_t ~ | ~ \mu_t + \bm w_{t}^T \bm x_{pa(t)}, \sigma_t^2)
+	p(x_t ~ | ~ \bm x_{pa(t)}) = \mathcal{N}(x_t  |  \mu_t + \bm w_{t}^T \bm x_{pa(t)}, \sigma_t^2)
 \end{equation}
 
 La estructura de $\mathcal{M}$ permite modelar la probabilidad conjunta de las
