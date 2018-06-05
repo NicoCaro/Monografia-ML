@@ -186,10 +186,10 @@ p(\bm w | \sigma_w^2) \prod_{i = 1}^{N} p(y_i | \bm w, x_i, \sigma_\varepsilon^2
 \end{equation}
 
 La figura \ref{fig:plate_poly_graph_2} muestra el grafo correspondiente a \ref{poly_fact_2}.
-Por convención, las variables deterministicas se incluyen en el grafo como circulos
+Por convención, las variables deterministas se incluyen en el grafo como círculos
 pequeños, mientras que las variables aleatorias observadas se muestran como nodos grises,
-los nodos incloloros representan variables latentes o no observadas, finalemnte las
-aristas, al igual que en los ejemplos anteriores, represetan la dependecia condicional
+los nodos incoloros representan variables latentes o no observadas, finalmente las
+aristas, al igual que en los ejemplos anteriores, representan la dependencia condicional
 en la factorización de la probabilidad conjunta.
 
 \subsection{Modelos gráficos dirigidos gaussianos}
@@ -233,9 +233,36 @@ para $s \neq t$. De esto se deduce:
 \mathbb{E}[x_t] = \sum_{s \in pa(t)} w_{ts} \mathbb{E}[x_s] + \mu_t
 \end{equation}
 
-Es posible entonces, encontrar de manera recursiva las componentes de $\mathbb{E}[\bm x]
+Es posible entonces, encontrar las componentes de $\bm \mu =\mathbb{E}[\bm x]
 =(\mathbb{E}[x_1], \ldots, \mathbb{E}[x_V])^T$ utilizando la estructura gráfica
-de $\mathcal{M}$. Para ello, se comienza calculando $\mathbb{E}[x_1]$ para luego continuar
+dirigida de $\mathcal{M}$ (y por tanto su ordenamiento topológico). Para ello, se
+comienza calculando $\mathbb{E}[x_1]$ para luego
+continuar de manera recursiva según la numeración de los nodos.
 
+Similarmente, es posible calcular el elemento $\bm \Sigma_{st}$ de la matriz de covarianza
+observando:
+\begin{align}
+    \label{eq:E_cov}
+    \text{cov}(x_s,x_t) &= \mathbb{E}[(x_s - \mathbb{E}[x_s])(x_t - \mathbb{E}[x_t])] \nonumber \\
+                        &= \left[ (x_s - \mathbb{E}[x_s]) \left\lbrace {\sum_{k \in pa(x_t)} w_{tk} (x_k - \mathbb{E}[x_k]) + \sigma_t \varepsilon_t} \right\rbrace \right]\\
+                        &= \sum_{k \in pa(x_t)} w_{tk} ~ \text{cov}[x_s, x_t] + \sigma_t^2 \bm I_{st} \nonumber
+\end{align}
+
+De donde al igual que en (\ref{eq:E_x_2}), se calculan los elementos de $\bm \Sigma$
+recursivamente.
+
+Finalmente, se puede extender el modelo inducido por ()\ref{eq:gaussian_cpd}) a uno
+donde los nodos del modelo gráfico representen variables aleatorias gaussianas
+multivariantes. Para esto, se reescribe la distribución de probabilidad condicional
+para el nodo $x_t$ en la forma:
+\begin{equation}
+    \label{eq:gaussian_cpd_multi}
+	p(\bm x_t ~ | ~ pa(\bm x_t)) =  \mathcal{N}\left( \bm x_t ~  \vline height 4ex
+    depth 10pt \sum_{s \in pa(\bm x_t)} \bm W_{ts} \bm x_s + \bm \mu_t~, \bm \Sigma_t \right)
+\end{equation}
+
+Donde $\bm W_{ts}$ es una matriz de pesos entre los vectores de cada nodo.
+
+\section{independencia condicional}
 \section{Modelos gráficos no dirigidos}
 \section{Inferencia exacta en modelos gráficos}
