@@ -7,13 +7,13 @@
 \begin{quotation}
     El \textit{machine learning} fue un objeto de lujo, pero para nosotros es
     un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
-	\todo{Poner algo profundo por el estilo. (?)}
+	\NC{Poner algo profundo por el estilo. (?)}
 \end{quotation}
 
 \section*{Introducción}
 
 El eje central de este capitulo se basa en la búsqueda de una representación compacta, para
-distribuciones de probabilidad conjunta de la forma $p(\bm x \ | \ \bm\theta)$. Esto, con
+distribuciones de probabilidad conjunta de la forma $p(\bm x | \bm\theta)$. Esto, con
 la intención de realizar inferencia sobre variables y aprendizaje de parámetros de manera
 eficiente
 
@@ -26,12 +26,12 @@ representar de la forma:
 	p(\bm x ) = p(x_1)p(x_2 \ \vline \ x_1 )p(x_3 \ \vline\  x_1, x_2) \ldots p(x_v\ \vline\  x_1, x_2, \ldots , x_{v-1})
 \end{equation}
 
-\todo{Agregar discusión sobre computabilidad. (?) (ref: Murphy, pg. 307)}
+\NC{discusión sobre computabilidad. (?) (ref: Murphy, pg. 307)}
 El problema con esta expresión es la dificultad computacional subyacente al cálculo de
-distribuciones condicionales de la forma $p(x_{t} \ \vline \  x_1,\ldots, x_{t-1} )$
+distribuciones condicionales de la forma $p(x_{t} |  x_1,\ldots, x_{t-1} )$
 cuando el número de variables incidentes $t$ aumenta.
 
-\todo{Agregar propiedades básicas del calculo de probabilidades (CI por ej.) al apéndice.}
+\NC{propiedades básicas del calculo de probabilidades (CI por ej.) al apéndice.}
 No obstante, la representación (\ref{eq:regla_cadena}) reduce su complejidad en presencia de
 \index{independencia condicional} \textbf{independencia condicional}.
 
@@ -40,7 +40,7 @@ las observaciones futuras $x_{t+1}$ son independientes del pasado $ x_{1}, \ldot
 x_{t-1}$, dado el estado presente $x_{t}$. La probabilidad conjunta se reduce entonces a:
 \begin{equation}
 \label{eq:markov_prop}
-p(\bm x ) = p(x_1) \prod_{t = 2}^{v} p(x_t \ |\  x_1,\ldots , x_{t-1}) = p(x_1) \prod_{t = 2}^{v} p(x_t \ |\ x_{t-1})
+p(\bm x ) = p(x_1) \prod_{t = 2}^{v} p(x_t  |  x_1,\ldots , x_{t-1}) = p(x_1) \prod_{t = 2}^{v} p(x_t  | x_{t-1})
 \end{equation}
 
 De lo cual se obtiene una expresión más simple.
@@ -49,7 +49,6 @@ Modelar la independencia condicional entre las variables permite entonces reduci
 complejidad de representación para la distribución conjunta. En particular, la elección tomada
 en (\ref{eq:markov_prop}) se conoce como \index{Propiedad de Markov} \textbf{propiedad de
 Markov} de primer orden.
-
 En un contexto general, las relaciones de independencia condicional entre variables aleatorias
 de dimensión arbitraria, se modelan utilizando \index{Diagramas de
 independencia}\textit{diagramas de independencia} o \index{Modelos gráficos}\textbf{modelos
@@ -76,7 +75,7 @@ gráfico dirigido} es un modelo gráfico probabilístico, cuyo grafo subyacente 
 dirigido acíclico} \textbf{grafo dirigido acíclico} (\index{DAG}DAG por sus siglas en ingles).
 Todo DAG posee un \index{ordenamiento topológico} \textit{ordenamiento topológico}, es decir,
 los nodos de cualquier DAG pueden ser numerados de manera tal, que todo nodo padre
-posea una numeración inferior a sus nodos hijos. \todo{Agregar lema de ordenamiento topológico
+posea una numeración inferior a sus nodos hijos. \NC{lema de ordenamiento topológico
 para DAG's en apéndice.} Esta característica permite enriquecer la formulación de la propiedad
 de Markov (\ref{eq:markov_prop}), usando la estructura grafica como componente adicional. De
 esta forma, se puede formular la \index{propiedad ordenada de Markov} \textbf{propiedad ordenada
@@ -95,7 +94,7 @@ De esta forma, la probabilidad conjunta de un modelo gráfico dirigido, que cump
 ordenada de Markov, se puede descomponer de la forma:
 \begin{equation}
 \label{eq:markov_prop_ord}
-p(\bm x ) = \prod_{t = 1}^{V} p(x_t \ |\  \bm x_{pa(t)})
+p(\bm x ) = \prod_{t = 1}^{V} p(x_t  |  \bm x_{pa(t)})
 \end{equation}
 
 \begin{example}[Modelo grafico asociado a $p(\bm x)$]
@@ -145,7 +144,7 @@ clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificado
 expresar según (\ref{eq:naive_bayes}) y el modelo gráfico dirigido de la figura \ref{fig:naive_bayes}.
 
 \subsection{Regresión polinomial}
-
+\NC{añadir intro significativa}
 las variables aleatorias son el vector de coeficientes polinomiales $\bm w$ y los
 datos observados $\bm y = (y_1 , \ldots , y_N)^{T}$. Adicionalmente, se parametriza
 el ruido del modelo a través de $\sigma_{\varepsilon}^2$ y la varianza de la distribución
@@ -157,7 +156,7 @@ a priori $p(\bm w)$ con las distribuciones condicionales $p(y_i  |  \bm w)$
 para $i = 1, \ldots, N$:
 \begin{equation}
     \label{eq:poly_fact_1}
- p(\bm y, \bm w ) = p(\bm w) \prod_{i = 1}^{N} p(y_i \ |\ \bm w)
+ p(\bm y, \bm w ) = p(\bm w) \prod_{i = 1}^{N} p(y_i  | \bm w)
 \end{equation}
 
 El grafo de tal factorización es similar al del clasificador naive Bayes \ref{fig:naive_bayes}.
@@ -167,30 +166,53 @@ usando esta convención. Aquí $N$ es la cantidad de nodos del modelo, de los cu
 el representante $y_i$.
 
 \begin{figure}[ht]
-    \centering
-    \subfloat[]{\label{fig:plate_poly_graph} \input{./figuras/plate_poly_graph}}
-    \caption{\subref{fig:plate_poly_graph} Clasificador naive Bayes con notación de placas.}
-
-    \centering
-    \subfloat[]{\label{fig:plate_poly_graph_2} \input{./figuras/plate_poly_graph_2}}
-    \caption{\subref{fig:plate_poly_graph_2} Clasificador naive Bayes con notación de placas.}
-
+\subfloat[]{\label{fig:plate_poly_graph}\input{./figuras/plate_poly_graph}}
+\quad
+\subfloat[]{\label{fig:plate_poly_graph_2}\input{./figuras/plate_poly_graph_2}}
+\quad
+\subfloat[]{\label{fig:plate_poly_graph_final}\input{./figuras/plate_poly_graph_final}}
+\caption{ Modelo grafico dirigido para regresión
+polinomial usando notación de placas (o \textit{plates}). En \subref{fig:plate_poly_graph}
+se muestra el grafo correspondiente a (\ref{eq:poly_fact_1}). En \subref{fig:plate_poly_graph_2}
+se añaden los parámetros deterministas y las variables aleatorias observadas. En \subref{fig:plate_poly_graph_final} se añaden datos de entrada y predicciones.}
 \end{figure}
 
-Si por otra parte, si se quiere estudiar la interacción de los parametros en el modelo,
+Si por otra parte, si se quiere estudiar la interacción de los parámetros en el modelo,
 es posible explicitarlos en la probabilidad conjunta para luego agregarlos al grafo:
 \begin{equation}
-\label{poly_fact_2}
+\label{eq:poly_fact_2}
 p(\bm y, \bm w | \bm x, \sigma_\varepsilon^2, \sigma_w^2 ) =
 p(\bm w | \sigma_w^2) \prod_{i = 1}^{N} p(y_i | \bm w, x_i, \sigma_\varepsilon^2)
 \end{equation}
 
-La figura \ref{fig:plate_poly_graph_2} muestra el grafo correspondiente a \ref{poly_fact_2}.
+La figura \ref{fig:plate_poly_graph_2} muestra el grafo correspondiente a (\ref{eq:poly_fact_2}).
 Por convención, las variables deterministas se incluyen en el grafo como círculos
 pequeños, mientras que las variables aleatorias observadas se muestran como nodos grises,
 los nodos incoloros representan variables latentes o no observadas, finalmente las
 aristas, al igual que en los ejemplos anteriores, representan la dependencia condicional
 en la factorización de la probabilidad conjunta.
+\NC{ver si es necesario cambiar el formato de los 3 grafos juntos. (muy pegados ?)}
+
+Para realizar predicciones en datos nuevos $\hat{x}$, se desea encontrar la distribución
+de probabilidad para $\hat{y}$ condicionada a la información que ya se posee. Esta
+corresponde a:
+\begin{equation}
+    \label{eq:ploy_conj_pred_0}
+    p(\hat{y}, \bm y, \bm w | \hat{x}, \bm x, \sigma_w^2, \sigma_\varepsilon^2)
+    = \left[ \prod_{i=1}^{N}p(y_i | x_i, \bm w, \sigma_\varepsilon^2) \right]
+    p(\bm w | \sigma_w^2) p(\hat{y} | \hat{x}, \bm w, \sigma_\varepsilon^2)
+\end{equation}
+
+Finalmente, se deduce la distribución predictiva para $\hat{y}$ :
+\begin{equation}
+    \label{eq:ploy_pred}
+    p(\hat{y}| \hat{x}, \bm y, \bm x, \sigma_w^2, \sigma_\varepsilon^2)
+    \propto \int p(\hat{y}, \bm y, \bm w | \hat{x}, \bm x,  \sigma_w^2,
+    \sigma_\varepsilon^2) ~ d \bm w
+\end{equation}
+
+El modelo gráfico dirigido que encapsula estas últimas ecuaciones se aprecia en
+\ref{fig:plate_poly_graph_final}.
 
 \subsection{Modelos gráficos dirigidos gaussianos}
 
@@ -198,14 +220,14 @@ Sea $\mathcal{M}$ un modelo grafico dirigido, en el cual todas las variables son
 reales y sus distribuciones de probabilidad condicional son lineal-gaussianas:
 \begin{equation}
 	\label{eq:gaussian_cpd}
-	p(x_t ~ | ~ \bm x_{pa(t)}) = \mathcal{N}(x_t  |  \mu_t + \bm w_{t}^T \bm x_{pa(t)}, \sigma_t^2)
+	p(x_t  |  \bm x_{pa(t)}) = \mathcal{N}(x_t  |  \mu_t + \bm w_{t}^T \bm x_{pa(t)}, \sigma_t^2)
 \end{equation}
 
 La estructura de $\mathcal{M}$ permite modelar la probabilidad conjunta de las
 variables del modelo en la forma:
 \begin{equation}
 	\label{eq:ver_red_bayesiana_gaussiana}
-	p(\bm x ~ | ~ \mathcal{M}) = \prod_{t=1}^{V} p(x_t ~ | ~ \bm x_{pa(t)}) =  \mathcal{N}(\bm x ~ | ~ \bm \mu , \Sigma)
+	p(\bm x  | \mathcal{M}) = \prod_{t=1}^{V} p(x_t  |  \bm x_{pa(t)}) =  \mathcal{N}(\bm x  |  \bm \mu , \Sigma)
 \end{equation}
 
 Lo cual se conoce como \index{red bayesiana gaussiana} \textbf{red bayesiana gaussiana}.
@@ -213,7 +235,7 @@ Para este tipo de modelos, es posible inferir
 $\bm \mu$ y $ \bm \Sigma$. En efecto, según (\ref{eq:ver_red_bayesiana_gaussiana}):
 \begin{equation}
 	\label{eq:log_gaussian_cpd}
-	 \log p( \bm x ~ | ~ \mathcal{M}) = - \sum_{t = 1}^{V} \frac{1}{2\sigma_t^2} \left(
+	 \log p( \bm x  |  \mathcal{M}) = - \sum_{t = 1}^{V} \frac{1}{2\sigma_t^2} \left(
 	 x_t - \sum_{s \in pa(t)} w_{ts}  x_s - \mu_t	 \right)^2 + K
 \end{equation}
 
@@ -239,8 +261,8 @@ dirigida de $\mathcal{M}$ (y por tanto su ordenamiento topológico). Para ello, 
 comienza calculando $\mathbb{E}[x_1]$ para luego
 continuar de manera recursiva según la numeración de los nodos.
 
-Similarmente, es posible calcular el elemento $\bm \Sigma_{st}$ de la matriz de covarianza
-observando:
+Similarmente, es posible calcular el elemento $\bm \Sigma_{st}$ de la matriz de
+covarianza, observando:
 \begin{align}
     \label{eq:E_cov}
     \text{cov}(x_s,x_t) &= \mathbb{E}[(x_s - \mathbb{E}[x_s])(x_t - \mathbb{E}[x_t])] \nonumber \\
@@ -251,7 +273,7 @@ observando:
 De donde al igual que en (\ref{eq:E_x_2}), se calculan los elementos de $\bm \Sigma$
 recursivamente.
 
-Finalmente, se puede extender el modelo inducido por ()\ref{eq:gaussian_cpd}) a uno
+Finalmente, se puede extender el modelo inducido por (\ref{eq:gaussian_cpd}) a uno
 donde los nodos del modelo gráfico representen variables aleatorias gaussianas
 multivariantes. Para esto, se reescribe la distribución de probabilidad condicional
 para el nodo $x_t$ en la forma:
