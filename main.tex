@@ -5,7 +5,7 @@
 \usepackage{subfiles} % Documento modular
 \usepackage[utf8]{inputenc} % Acentos simples
 \usepackage{bm} % Simbolos matematicos en negrita
-\usepackage{todonotes} % Notas
+
 
 % Modelos Graficos
 \usepackage{tikz}
@@ -16,6 +16,11 @@
 \renewcommand\thesubfigure{(\alph{subfigure})}
 \usepackage{etoolbox}
 \robustify{\subref}
+
+% TODO personalisados
+\usepackage{todonotes} % Notas
+\newcommand\NC[1]{\todo[color=green]{NicoCaro: \\ #1}}
+\newcommand\FT[1]{\todo[color=pink!80]{FT: \\ #1}}
 
 % Teoremas
 \newtheorem{theorem}{Theorem}[chapter]
