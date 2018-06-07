@@ -285,6 +285,94 @@ para el nodo $x_t$ en la forma:
 
 Donde $\bm W_{ts}$ es una matriz de pesos entre los vectores de cada nodo.
 
-\section{independencia condicional}
+\section{Independencia condicional en modelos gráficos dirigidos}
+
+Como se mencionó anteriormente, los modelos gráficos encapsulan las relaciones
+de independencia condicional entre las variables aleatorias del fenómeno que
+se modela. En esta sección se estudian las propiedades de los modelos gráficos
+dirigidos en cuanto sus propiedades \NC{terminar intro}
+
+En un grafo $G$, se escribe $x_i \perp_{G} x_j | x_k$ si el nodo
+$x_i$ es independiente de $x_j$ dado $x_k$. Se denota por $I(G)$ al conjunto
+de todas las relaciones de independencia condicional codificadas en el grafo $G$.
+
+\begin{definition}[Diagrama de independencia]
+\label{def:diagrama_independencia}
+Sea $p(\cdot)$ una distribución de probabilidad. Se dice que un grafo $G$ es un
+diagrama de independencia o \textit{I-map}  para $p$ si y solo si $I(G) \subseteq I(p)$.
+Donde $I(p)$ es el conjunto de todas las relaciones de independencia condicional
+ciertas para $p$.
+\end{definition}
+
+De la definición anterior, se deduce que un grafo $G$ es un diagrama de independencia
+para la distribución de probabilidad $p$, si este no contiene más relaciones de
+independencia condicional que las permitidas por $p$. De esta forma, toda distribución
+de probabilidad $p(\bm x)$, donde $\bm x = (x_1, ..., x_V)^T$, posee al menos un
+diagrama de independencia. En efecto, si se considera un grafo $G$ con nodos
+$\mathcal{V} = \lbrace{x_1, ..., x_V}\rbrace$ completamente conectados, entonces
+$G$ es un diagrama de independencia para $p$ pues no presenta aristas faltantes.
+
+De la discusión anterior, tiene sentido hablar de un \textit{diagrama de independencia minimal}
+$G$ para $p$, es decir, un grafo $G$, tal que si $G'$ es otro diagrama de independencia
+para $p$ que cumple  $G' \subseteq G$, entonces $G' = G$.
+
+A continuación se estudian las características de los modelos gráficos dirigidos
+que permiten determinar cuando existe independencia condicional en sus nodos.
+
+\subsection{d-separación}
+
+Se dice que un \textit{camino no dirigido} $P$ esta \textit{separado de manera dirigida}
+o \textit{d-separado} por un conjunto de nodos $E$, si y solo si, se cumple alguna
+de las siguiente condiciones:
+\begin{enumerate}
+    \item $P$ contiene una cadena, $s \rightarrow e \rightarrow t$, donde $e \in E$.
+    \item $P$ contiene una estructura $s \leftarrow e \rightarrow t$, donde $e \in E$.
+    \item $P$ contiene una estructura $s \rightarrow e \leftarrow t$, donde $e \notin E$
+    o $e$ \textbf{no} es descendiente de algún elemento de $E$.
+\end{enumerate}
+
+Se dice que un conjunto de nodos $A$ esta d-separado de un conjunto de nodos $B$,
+dado un conjunto de nodos $E$, si y solo si, todo camino no dirigido desde cada nodo
+de $A$ a cada nodo de $B$ esta d-separado por $E$.
+
+En un grafo acíclico dirigido $G$, se aprecia la siguiente propiedad:
+\begin{flalign}
+\bm x_A \perp_G \bm x_B | \bm x_E \iff A \text{ esta d-separado de } $B$ \text{ dado } E
+\end{flalign}
+
+Para comprender las propiedades anteriores, se analizan los siguientes ejemplos:
+
+\begin{itemize}
+    \item Sea $x \rightarrow y \rightarrow z$ una cadena, tal grafo codifica la
+    siguiente probabilidad conjunta:
+    \begin{equation*}
+        p(x,y,z) = p(x) p(y | x)p(z | y)
+    \end{equation*}
+    Usando la propiedad (1), se puede deducir que $x \perp z | y$. Esto se comprueba
+    pues:
+    \begin{equation*}
+    p(x,z | y) = \frac{p(x, y, z)}{p(y)} = \frac{p(x) p(y | x) p(z | y)}{p(y)}
+    = \frac{p(x,y) p(z | y)}{p(y)}= p(x|y)p(z|y)
+    \end{equation*}
+
+    \item Sea la estructura $x \leftarrow y \rightarrow z$, según la propiedad (2),
+    $x \perp z | y$. En efecto,
+    \begin{equation*}
+    p(x, z | y) = \frac{p(x, y, z)}{p(y)} = \frac{p(y)p(x|y)p(z|y)}{p(y)} =p(x|y)p(z|y)
+    \end{equation*}
+
+    \item Sea finalmente la estructura $x \rightarrow y \leftarrow z$, en este caso
+    $x \not\perp z | y$ :
+    \begin{equation*}
+    p(x, z | y) = \frac{p(x, y, z)}{p(y)} = \frac{p(x)p(y|x,z)p(z)}{p(y)} \neq p(x|y)p(z|y)
+    \end{equation*}
+    Es por tal motivo que en la propiedad (3), se requiera en este tipo de estructuras,
+    que no existan nodos, ni descendientes de nodos de la familia condicionante $E$.
+\end{itemize}
+
+Si bien en el último caso, no se cumplia $x \perp z | y$, si se tiene $p(x,z) = p(x)p(z)$,
+es decir, $x$ y $z$ son marginalmente independientes, sin embargo, al condicionar ambos nodos
+por un nodo hijo $y$, se vuelven dependientes, este efecto se denomina \textbf{paradoja de Berkson}.
+
 \section{Modelos gráficos no dirigidos}
 \section{Inferencia exacta en modelos gráficos}
