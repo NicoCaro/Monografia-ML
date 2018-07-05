@@ -1,7 +1,7 @@
 % !TEX root = ../main.tex
 %!TeX spellcheck = es-CL
-
 \documentclass[../main.tex]{subfiles}
+
 \chapter{Modelos gráficos probabilísticos}
 
 \begin{quotation}
@@ -15,7 +15,7 @@
 El eje central de este capitulo se basa en la búsqueda de una representación compacta, para
 distribuciones de probabilidad conjunta de la forma $p(\bm x | \bm\theta)$. Esto, con
 la intención de realizar inferencia sobre variables y aprendizaje de parámetros de manera
-eficiente
+eficiente. \NC{Mejorar intro, añadir discusión sobre inferencia y aprendizaje.}
 
 
 \section{Modelos gráficos dirigidos}
@@ -149,7 +149,8 @@ las variables aleatorias son el vector de coeficientes polinomiales $\bm w$ y lo
 datos observados $\bm y = (y_1 , \ldots , y_N)^{T}$. Adicionalmente, se parametriza
 el ruido del modelo a través de $\sigma_{\varepsilon}^2$ y la varianza de la distribución
 a priori \footnote{Considerándose una distribución a priori, gaussiana y esférica sobre $\bm w$.}
-de $\bm w$ por $\sigma_w^2$. Finalmente, los datos de entrada se denotan por $\bm x = (x_1 , \ldots , x_N)^{T}$.
+de $\bm w$ por $\sigma_w^2$. Finalmente, los datos de entrada se denotan por
+$\bm x = (x_1 , \ldots , x_N)^{T}$.
 
 La probabilidad conjunta de este modelo es el producto de la probabilidad
 a priori $p(\bm w)$ con las distribuciones condicionales $p(y_i  |  \bm w)$
@@ -174,7 +175,8 @@ el representante $y_i$.
 \caption{ Modelo grafico dirigido para regresión
 polinomial usando notación de placas (o \textit{plates}). En \subref{fig:plate_poly_graph}
 se muestra el grafo correspondiente a (\ref{eq:poly_fact_1}). En \subref{fig:plate_poly_graph_2}
-se añaden los parámetros deterministas y las variables aleatorias observadas. En \subref{fig:plate_poly_graph_final} se añaden datos de entrada y predicciones.}
+se añaden los parámetros deterministas y las variables aleatorias observadas. En
+\subref{fig:plate_poly_graph_final} se añaden datos de entrada y predicciones.}
 \end{figure}
 
 Si por otra parte, si se quiere estudiar la interacción de los parámetros en el modelo,
@@ -301,7 +303,7 @@ de todas las relaciones de independencia condicional codificadas en el grafo $G$
 Sea $p(\cdot)$ una distribución de probabilidad. Se dice que un grafo $G$ es un
 diagrama de independencia o \textit{I-map}  para $p$ si y solo si $I(G) \subseteq I(p)$.
 Donde $I(p)$ es el conjunto de todas las relaciones de independencia condicional
-ciertas para $p$.
+ciertas para las variables de $p$.
 \end{definition}
 
 De la definición anterior, se deduce que un grafo $G$ es un diagrama de independencia
@@ -310,14 +312,17 @@ independencia condicional que las permitidas por $p$. De esta forma, toda distri
 de probabilidad $p(\bm x)$, donde $\bm x = (x_1, ..., x_V)^T$, posee al menos un
 diagrama de independencia. En efecto, si se considera un grafo $G$ con nodos
 $\mathcal{V} = \lbrace{x_1, ..., x_V}\rbrace$ completamente conectados, entonces
-$G$ es un diagrama de independencia para $p$ pues no presenta aristas faltantes.
+$G$ es un diagrama de independencia para $p$ pues no presenta aristas faltantes y
+por tanto se condiciona en todas las variables.
 
 De la discusión anterior, tiene sentido hablar de un \textit{diagrama de independencia minimal}
 $G$ para $p$, es decir, un grafo $G$, tal que si $G'$ es otro diagrama de independencia
 para $p$ que cumple  $G' \subseteq G$, entonces $G' = G$.
 
-A continuación se estudian las características de los modelos gráficos dirigidos
-que permiten determinar cuando existe independencia condicional en sus nodos.
+Finalmente, tal representación, permite extraer de su estructura gráfica, relaciones
+no triviales de independencia condicional, entre las variables de importancia. En el
+caso de un modelo gráfico dirigido, la noción de \textit{separación dirigida}
+o \textit{d-separación} facilita dicha tarea.
 
 \subsection{d-separación}
 
@@ -336,9 +341,10 @@ dado un conjunto de nodos $E$, si y solo si, todo camino no dirigido desde cada 
 de $A$ a cada nodo de $B$ esta d-separado por $E$.
 
 En un grafo acíclico dirigido $G$, se aprecia la siguiente propiedad:
-\begin{flalign}
-\bm x_A \perp_G \bm x_B | \bm x_E \iff A \text{ esta d-separado de } $B$ \text{ dado } E
-\end{flalign}
+%\begin{flalign}
+%    \label{eq:global_markov}
+%\bm x_A \perp_G \bm x_B | \bm x_E \iff A \text{ esta d-separado de } $B$ \text{ dado } E
+%\end{flalign}
 
 Para comprender las propiedades anteriores, se analizan los siguientes ejemplos:
 
@@ -366,13 +372,94 @@ Para comprender las propiedades anteriores, se analizan los siguientes ejemplos:
     \begin{equation*}
     p(x, z | y) = \frac{p(x, y, z)}{p(y)} = \frac{p(x)p(y|x,z)p(z)}{p(y)} \neq p(x|y)p(z|y)
     \end{equation*}
-    Es por tal motivo que en la propiedad (3), se requiera en este tipo de estructuras,
+    Es por tal motivo que en la propiedad (3), se requiere en este tipo de estructuras,
     que no existan nodos, ni descendientes de nodos de la familia condicionante $E$.
 \end{itemize}
 
-Si bien en el último caso, no se cumplia $x \perp z | y$, si se tiene $p(x,z) = p(x)p(z)$,
-es decir, $x$ y $z$ son marginalmente independientes, sin embargo, al condicionar ambos nodos
-por un nodo hijo $y$, se vuelven dependientes, este efecto se denomina \textbf{paradoja de Berkson}.
+En el último caso, se puede comprobar que los nodos $x$ e $y$ son marginalmente
+independientes entre si, es decir, $p(x,z) = p(x)p(z)$. Sin embargo, al condicionar
+ambos nodos por $y$, se vuelven dependientes, este efecto se denomina
+\textbf{paradoja de Berkson}. Finalmente, un modelo gráfico probabilístico que
+verifica la equivalencia (\ref{eq:global_markov}) se dice que cumple la
+\index{propiedad global de Markov} \textbf{propiedad global de Markov}.
+
+\subsection{Markov blankets}
+
+De la d-separación es posible concluir:
+\begin{equation}
+    \label{eq:ci_dgm}
+    x_t \perp \bm x_{nd(t) \setminus pa(t)} | \bm x_{pa(t)}
+\end{equation}
+
+Donde $nd(t)$ son los \textbf{no-descendientes} del nodo $x_t$
+\footnote{$nd(t)= \mathcal{V}\setminus\lbrace{t \cup desc(t)}\rbrace$, donde $desc(t)$
+son los descendientes del nodo $x_{t}$, es decir, aquellos nodos que provienen de un
+camino dirigido con origen en $x_t$.}. De esta forma, es posible concluir que en
+\ref{fig:grafo_ejemplo} $x_{4} \perp x_{5} | x_1 , x_2, x_3$, pues en efecto,
+$nd(4)\setminus pa(4)= x_5$ y $pa(4) = x_1 , x_2, x_3$. La ecuación (\ref{eq:ci_dgm})
+se conoce como \index{propiedad dirigida local de Markov} \textbf{propiedad dirigida local de Markov}.
+
+En especial, dado que $pred(t) \subseteq nd(t)$ se deriva la \textbf{propiedad ordenada de Markov},
+ya presentada en (\ref{eq:Markov_ordenado}). Sorprendentemente, estas tres propiedades
+son equivalentes.\NC{revisar demostración Koller, Friedman 2009}
+
+Por otra parte, para cada nodo $x_t$ es posible extraer el conjunto de nodos
+que lo separan del resto del grafo, es decir, se puede para cada nodo $x_t$, obtener
+el conjunto de todas las variables aleatorias que lo vuelven condicionalmente independiente
+a los demás nodos del modelo. El conjunto antes descrito se denomina \index{Markov blanket}
+\textbf{Markov blanket} y se denota por $mb(t)$ este conjunto de nodos corresponde a:
+\begin{equation}
+    \label{eq:markov_blanket}
+    mb(t):= ch(t) \cup pa(t) \cup copa(t)
+\end{equation}
+
+Donde $ch(t)$ son los nodos hijos de $x_t$, de manera análoga $pa(t)$ son nodos padres
+y $copa(t)$ sus copadres \footnote{nodos que comparten hijos con $x_t$}. En la
+figura \ref{fig:grafo_ejemplo} se tiene por ejemplo $mb(5) = \lbrace x_6, x_1, x_3, x_4 \rbrace$.
+Según la propiedad global de Markov, la presencia de los nodos copadres no parece
+ser necesaria en primera instancia (la dependencia condicional debería recaer
+unicamente en los nodos padres), sin embargo, al definir $\bm x_{-t}$ como el
+conjunto de nodos distintos a $x_t$, es posible observar que la probabilidad conjunta adquiere
+la forma $p(\bm x) = p(x_t , \bm x_{-t})$. De donde, al marginalizar sobre el
+nodo $x_t$, se obtiene que $p(\bm x_{-t})$ contiene sólo a aquellos nodos del modelo
+en los que la variable $x_t$ no aparece como argumento, ni como condicionante
+(dada la factorización de la probabilidad conjunta codificada en el grafo).
+Lo anterior implica que en $p(x_t | \bm x_{-t}) = p(\bm x)/p(\bm x_{-t})$
+solo se podrán encontrar probabilidades condicionales donde $x_t$ sea el argumento,
+lo que expresa con $p(x_t | \bm x_{pa(t)})$, o donde sea variable condicionante,
+es decir, sea padre o copadre de algún otro nodo. Se deduce:
+\begin{equation}
+    \label{eq:full_conditional}
+    p(x_t | \bm x_{-t}) \propto p(x_t | \bm x_{pa(t)}) \prod_{s \in ch(t)} p(x_s | \bm x_{pa(s)})
+\end{equation}
+
+La expresión (\ref{eq:full_conditional}) se conoce como \index{condicional completa}
+\textbf{condicional completa} del nodo $x_t$.
+\newpage
 
 \section{Modelos gráficos no dirigidos}
+
+Los modelos gráficos dirigidos presentan una alternativa de modelación modular e
+interpretable. Sin embargo, su estructura los hace demasiado rígidos en aplicaciones
+donde las variables interactúan de manera simétrica (datos espaciales y relacionales por ejemplo).
+
+Como alternativa, se encuentran los \index{modelos gráficos no dirigidos} \textbf{modelos gráficos no dirigidos},
+los cuales, como indica su nombre, no requieren el uso de aristas dirigidas y por tanto,
+encapsulan de manera natural la simetría que pierden los modelos dirigidos.
+
+Para ilustrar la Introducción anterior, las figuras \ref{fig:dgm_ugm_a}
+y \ref{fig:dgm_ugm_a} muestran los markov blankets de un nodo para el caso dirigido
+y no dirigido en un arreglo 2d, común en aplicaciones referentes a imágenes y datos espaciales.
+
+\begin{figure}[ht]
+\label{fig:dgm_ugm}
+\subfloat[]{\label{fig:dgm_ugm_a}\input{./figuras/dgm_ugm_a}}
+\quad
+\subfloat[]{\label{fig:dgm_ugm_b}\input{./figuras/dgm_ugm_b}}
+\quad
+\caption{ Modelo gráfico dirigido (izquierda) contrapuesto a uno no dirigido (derecha). En \subref{fig:dgm_ugm_a} el markov blanket de $x_{11}$ añade a $x_8$ y $x_{14}$ a sus vecinos inmediatos, mientras excluye a $x_6$ y $x_16$ en aplicaciones basadas en imágenes, este comportamiento puede no ser el deseado. Por otra parte en \subref{fig:dgm_ugm_b} el nodo $x_{11}$ esta separado del resto solo por sus vecinos inmediatos.}
+\end{figure}
+
+
+
 \section{Inferencia exacta en modelos gráficos}

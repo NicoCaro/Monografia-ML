@@ -56,10 +56,11 @@
 }
 
 % Insertar figura dummy
-\newcommand{\dummyfig}[1]{%
+\newcommand{\dummyfig}[2]{%
 \begin{figure}[tb]
+    \label{#1}
 	\blankbox{.6\columnwidth}{5pc}
-	\caption{#1.}
+	\caption{#2}
 \end{figure}
 }
 
