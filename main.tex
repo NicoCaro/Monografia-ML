@@ -1,5 +1,9 @@
 \documentclass{amsbook}
 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
 % Librerias Personales
 
 \usepackage{subfiles} % Documento modular
@@ -8,7 +12,7 @@
 
 
 % Modelos Graficos
-\usepackage{tikz} 
+\usepackage{tikz}
 
 % Sub-figuras
 \usepackage[format=hang,singlelinecheck=0,font={sf,small},labelfont=normal]{subfig}
@@ -66,19 +70,21 @@
 
 % Inclusion especifica de secciones para debug.
 % \includeonly{preface,chap1,biblio,index}
-
-
 \begin{document}
+
 \frontmatter
-\title{Monografía sobre Aprendizaje Automático}
 
-%    Information for first author
-\author{Nicolás Caro}
-%    Address of record for the research reported here
-\address{Departamento de Ingenieria Matematica, Universidad de Chile, Santiago.}
-\email{ncaro@dim.uchile.cl}
+\begin{titlepage}
+\begin{center}
+\Huge{\textbf{Monografía sobre Aprendizaje Automático}}\\[1cm]
+\Large{Nicolás Caro}\\[1cm]
+\large{Departamento de Ingeniería Matemática, Universidad de Chile, Santiago.}\\[1cm]
+\large{ncaro@dim.uchile.cl}\\
+\vspace*{\fill}
+\large{\today}
 
-\maketitle
+\end{center}
+\end{titlepage}
 
 \setcounter{page}{4}
 \tableofcontents
