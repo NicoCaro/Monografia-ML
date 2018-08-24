@@ -13,3 +13,141 @@ Origina alza de las métricas.
 \NC{Poner algo profundo por el estilo. (?)}
 
 \end{quotation}
+
+\section{Introducción}
+
+Un kernel es una función simétrica y definida positiva $k(\cdot,\cdot)$ que
+puede ser entendida como una medida de similitud entre los argumentos que opera.
+En el siguiente capítulo, se definen estos objetos matemáticos de manera formal,
+se investigan sus características y se derivan algunos métodos del aprendizaje
+de máquinas que toman ventaja sus propiedades.
+
+\section{Terminología y propiedades}
+
+El término \textbf{kernel} proviene del estudio de operadores integrales en el
+campo del análisis funcional. En tal contexto se les identifica como aquellas
+funciones $k$ que determinan un operador $T_k$ a través de:
+\begin{equation}
+    (T_k f) (x) = \int_{\mathcal{X}} k(x,x') f(x') dx
+\end{equation}
+
+En concordancia con la perspectiva que se desea abarcar, se denotará como kernel
+a toda función $k: \mathcal{X} \times \mathcal{X} \rightarrow \mathbb{R}$ en el
+espacio de características \footnote{El codominio del kernel $k$ no tiene por que
+restringirse a los reales, para ciertas aplicaciones puede ser conviene utilizar
+los complejos. En general las propiedades de interés se preservan en ambos cuerpos,
+por lo que por simplicidad se considera solo el caso real en esta monografía.}.
+Dentro de tal clase de funciones, son de importancia a aquellas capaces de ``generalizar"
+el concepto de \textit{porducto interno}, el \index{Teorema de Mercer}
+\textbf{Teorema de Mercer} permite identificar tal subconjunto.
+\NC{Agregar apendice sobre Teoria de Medida + integrar respecto a una medida
+learning with Kernels}
+\begin{theorem}[Teorema de Mercer]
+\label{mercer}
+Sea $(\mathcal{X},\mu)$ un espacio de medida finita y $k \in L_{\infty}(\mathcal{X}^2)$
+una función real y simétrica, tal que el operador integral:
+
+\begin{gather}
+    \begin{aligned}
+        T_k &: L_{2}(\mathcal{X}) \rightarrow L_{2}(\mathcal{X}) \\
+        (T_k f) (x) &:= \int_{\mathcal{X}} k(x,x') f(x') d\mu(x')
+    \end{aligned}
+\end{gather}
+
+es definido positivo, es decir, para toda $f \in L_{2}(\mathcal{X})$ se cumple:
+\begin{equation}
+    \int_{\mathcal{X}^2} k(x,x') f(x) f(x') d\mu(x) d\mu(x') \geq 0
+\end{equation}
+
+Si $\psi_j \in L_2(\mathcal{X})$ son las funciones propias ortonormales de $T_f$
+asociadas a los valores propios $\lambda_j > 0$, ordenados de manera decreciente.
+Entonces,
+\begin{enumerate}
+    \item $(\lambda_j)_j \in l_1$
+    \item $k(x,x')=\sum_{j=1}^{N_{\mathcal{H}}} \lambda_j \psi_j(x)\psi_j(x')$
+    se cumple para casi todos los elementos $x,x' \in \mathcal{X}$. Además $N_{\mathcal{H}} \in \mathbb{N}$
+    o $N_{\mathcal{H}} = \infty$, en este último caso, la serie respectiva converge
+    absoluta y uniformemente para casi todos los elementos $x,x' \in \mathcal{X}$.
+\end{enumerate}
+
+\end{theorem}
+\NC{Esquema de la demostración ?}
+De la segunda implicación del teorema anterior, se puede deducir que
+$k(x,x')$ corresponde a un producto interno en $l_2^{N_{\mathcal{H}}}$ definido
+a través de $k(x,x')=\langle \Phi(x),\Phi(x') \rangle$ donde:
+\begin{gather*}
+    \begin{aligned}
+        \Phi: \mathcal{X} ~ &\rightarrow ~ l_2^{N_{\mathcal{H}}} \\
+        x ~ &\mapsto ~ (\sqrt{\lambda_j} \psi_j(x))_{j=1,\ldots,N_{\mathcal{H}}}
+    \end{aligned}
+\end{gather*}
+
+Para casi todo $x \in \mathcal{X}$. En este caso, $\Phi$ se interpreta como una
+aplicación al espacio de características. Vale destacar, que tal espacio posee
+producto interno, más aún, el hecho de que exista convergencia uniforme en
+la serie, significa que para cualquier precisión $\varepsilon >0$, debe existir un
+$n \in \mathbb{N}$ tal que $k$ puede ser aproximado como un producto interno en
+$\mathbb{R}^{n}$. Lo anterior se observa al notar que para casi todo $x,x' \in \mathcal{X}$,
+se tiene $|k(x,x') - \langle \Phi^{n}(x), \Phi^{n}(x') \rangle| < \varepsilon$,
+donde $ \Phi^{n}(x): x \mapsto (\sqrt{\lambda_1}\psi_1(x), \ldots,\sqrt{\lambda_n}\psi_n(x))$.
+En tal contexto, se puede interpretar al espacio de características como un espacio
+finito dimensional dentro de cierta precisión $\varepsilon$. Tal observación se
+concreta en el siguiente teorema:
+
+\begin{theorem}[Aplicación kernel de Mercer]
+\label{mercer_app}
+Si $k$ es un kernel que cumple las condiciones del teorema (\ref{mercer}), se
+puede construir una aplicación $\Phi$ a un espacio donde $k$ se comporta
+como un producto interno:
+\begin{equation*}
+    k(x,x') = \langle \Phi(x), \Phi(x') \rangle
+\end{equation*}
+para casi todo $x,x' \in \mathcal{X}$. Más aún, para todo $\varepsilon >0$, existe
+una aplicación $\Phi_{n}$ a un espacio $n-$dimensional con producto interno tal que
+\begin{equation*}
+    |k(x,x') - \langle \Phi_{n}(x), \Phi_{n}(x') \rangle| < \varepsilon
+\end{equation*}
+para casi todo $x,x' \in \mathcal{X}$.
+\end{theorem}
+
+La construcción que ofrece el \textbf{teorema de Mercer} permite bajo ciertas
+condiciones, obtener una representación del espacio inicial $\mathcal{X}$ en un espacio
+con producto interno de alta dimensionalidad (dentro de cierta precisión $\varepsilon$).
+Esta construcción se obtiene a través de una descomposición espectral del operador
+$T_k$ asociado al kernel $k$.
+
+Al observar la representación del kernel en función de la descomposición espectral
+de $T_k$ y reemplazar en la definición de positividad de este último, se obtiene:
+\begin{gather}
+    \begin{aligned}
+        \int_{\mathcal{X}^2} k(x,x') f(x) f(x') d\mu(x) d\mu(x') =
+        \sum_{j}^{N_{\mathcal{H}}}\lambda_j \left[\int_{\mathcal{X}}\psi_j(x)f(x)d\mu(x)\right]^2 \geq 0 \\
+        ~~~ \forall f \in L_{2}(\mathcal{X})
+    \end{aligned}
+\end{gather}
+
+
+
+
+
+Debido a las propiedades geometricas y resultados de aproximación que ofrecen
+los espacios con producto interno,
+
+
+A Reproducing Kernel Hilbert Space (RKHS) is first of all a Hilbert
+space, that is, the most natural extension of the mathematical model
+for the actual space where everyday life takes place (the Euclidean space
+JR3) . When studying elements of some abstract set S it is convenient
+to consider them as elements of some other set S' on which is already
+defined a structure relevant to the problem to be treated . It can be for
+instance an order structure, a vector structure, a metric structure or
+a mixing of algebraic and topological structures. For this we need an
+"imbedding theorem" or a "representation theorem" . Through this kind
+of theorem the study of elements of S is transferred to their "represen-
+ters" in S' and can be carried out using the structure on S' . For their
+richness and simplicity Hilbert spaces are introduced as often as possible
+when a vector structure and an inner product can be exploited. They
+provide powerful mathematical tools and geometric concepts on which
+our intuition can rest. The phrase "RKHS method" is generic to nam e a
+method based on the embedding of the abstract set S into some RKHS
+S'
