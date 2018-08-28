@@ -5,7 +5,7 @@
 \usepackage{amssymb}
 
 % Librerias Personales
-
+\usepackage{framed}
 \usepackage{subfiles} % Documento modular
 \usepackage[utf8]{inputenc} % Acentos simples
 \usepackage{bm} % Simbolos matematicos en negrita
@@ -66,6 +66,13 @@
 	\blankbox{.6\columnwidth}{5pc}
 	\caption{#2}
 \end{figure}
+}
+
+% Insertar ecuaciones
+\newcommand{\toLatex}[1]{%
+\begin{framed}
+\includegraphics[width=1\columnwidth]{/home/nico/MEGAsync/Doctorado/primer semestre/Seminario AGW - GP/Monografia-ML-master/toLatex/#1}%
+\end{framed}
 }
 
 % Inclusion especifica de secciones para debug.

@@ -54,7 +54,7 @@ una función real y simétrica, tal que el operador integral:
     \end{aligned}
 \end{gather}
 
-es definido positivo, es decir, para toda $f \in L_{2}(\mathcal{X})$ se cumple:
+es semidefinido positivo, es decir, para toda $f \in L_{2}(\mathcal{X})$ se cumple:
 \begin{equation}
     \int_{\mathcal{X}^2} k(x,x') f(x) f(x') d\mu(x) d\mu(x') \geq 0
 \end{equation}
@@ -71,28 +71,18 @@ Entonces,
 \end{enumerate}
 
 \end{theorem}
-\NC{Esquema de la demostración ?}
-De la segunda implicación del teorema anterior, se puede deducir que
-$k(x,x')$ corresponde a un producto interno en $l_2^{N_{\mathcal{H}}}$ definido
-a través de $k(x,x')=\langle \Phi(x),\Phi(x') \rangle$ donde:
-\begin{gather*}
-    \begin{aligned}
-        \Phi: \mathcal{X} ~ &\rightarrow ~ l_2^{N_{\mathcal{H}}} \\
-        x ~ &\mapsto ~ (\sqrt{\lambda_j} \psi_j(x))_{j=1,\ldots,N_{\mathcal{H}}}
-    \end{aligned}
-\end{gather*}
 
-Para casi todo $x \in \mathcal{X}$. En este caso, $\Phi$ se interpreta como una
-aplicación al espacio de características. Vale destacar, que tal espacio posee
-producto interno, más aún, el hecho de que exista convergencia uniforme en
-la serie, significa que para cualquier precisión $\varepsilon >0$, debe existir un
-$n \in \mathbb{N}$ tal que $k$ puede ser aproximado como un producto interno en
-$\mathbb{R}^{n}$. Lo anterior se observa al notar que para casi todo $x,x' \in \mathcal{X}$,
-se tiene $|k(x,x') - \langle \Phi^{n}(x), \Phi^{n}(x') \rangle| < \varepsilon$,
-donde $ \Phi^{n}(x): x \mapsto (\sqrt{\lambda_1}\psi_1(x), \ldots,\sqrt{\lambda_n}\psi_n(x))$.
-En tal contexto, se puede interpretar al espacio de características como un espacio
-finito dimensional dentro de cierta precisión $\varepsilon$. Tal observación se
-concreta en el siguiente teorema:
+La segunda implicación del teorema anterior, permite construir una aplicación
+$\Phi: \mathcal{X} ~ &\rightarrow ~ l_2^{N_{\mathcal{H}}}$ tal que
+$x ~ &\mapsto ~ (\sqrt{\lambda_j} \psi_j(x))_{j=1,\ldots,N_{\mathcal{H}}}$, es decir,
+a cada elemento de $\mathcal{X}$ se le asocia una transformación por medio de las
+funciones propias asociadas a $k(\cdot,\cdot)$ al espacio $l_2^{N_{\mathcal{H}}}$.
+Este último espacio esta provisto de producto interno, por lo que es posible expresar
+$k(x,x') = \langle  \Phi(x), \Phi(x') \rangle_{l_2^{N_{\mathcal{H}}}}$ para casi todo $x \in \mathcal{X}$.
+Esto permite interpretar a $\Phi$ como una aplicación a un espacio de \textit{características},
+más aún, en este espacio $k(\cdot,\cdot)$ actúa como un producto interno, esto se
+concreta en el siguiente teorema.
+
 
 \begin{theorem}[Aplicación kernel de Mercer]
 \label{mercer_app}
@@ -110,44 +100,83 @@ una aplicación $\Phi_{n}$ a un espacio $n-$dimensional con producto interno tal
 para casi todo $x,x' \in \mathcal{X}$.
 \end{theorem}
 
-La construcción que ofrece el \textbf{teorema de Mercer} permite bajo ciertas
-condiciones, obtener una representación del espacio inicial $\mathcal{X}$ en un espacio
-con producto interno de alta dimensionalidad (dentro de cierta precisión $\varepsilon$).
-Esta construcción se obtiene a través de una descomposición espectral del operador
-$T_k$ asociado al kernel $k$.
+La convergencia uniforme en el teorema anterior implica que para cualquier precisión
+$\varepsilon >0$, debe existir un $n \in \mathbb{N}$ tal que $k$ puede ser aproximado
+como un producto interno en $\mathbb{R}^{n}$. Lo anterior se observa al notar que
+para casi todo $x,x' \in \mathcal{X}$, se tiene $|k(x,x') - \langle \Phi^{n}(x), \Phi^{n}(x') \rangle| < \varepsilon$,
+donde $ \Phi^{n}(x): x \mapsto (\sqrt{\lambda_1}\psi_1(x), \ldots,\sqrt{\lambda_n}\psi_n(x))$.
+En tal contexto, se puede interpretar al espacio de características como un espacio
+finito dimensional dentro de cierta precisión $\varepsilon$. Esta característica
+es una parte esencial en el aprendizaje con kernels y dará lugar a la técnica
+conocida como \textit{truco del kernel}.
 
-Al observar la representación del kernel en función de la descomposición espectral
-de $T_k$ y reemplazar en la definición de positividad de este último, se obtiene:
-\begin{gather}
-    \begin{aligned}
-        \int_{\mathcal{X}^2} k(x,x') f(x) f(x') d\mu(x) d\mu(x') =
-        \sum_{j}^{N_{\mathcal{H}}}\lambda_j \left[\int_{\mathcal{X}}\psi_j(x)f(x)d\mu(x)\right]^2 \geq 0 \\
-        ~~~ \forall f \in L_{2}(\mathcal{X})
-    \end{aligned}
-\end{gather}
+La condición de simetría para $k(\cdot, \cdot)$, necesaria en el teorema (\ref{mercer}),
+permite dotar de esta propiedad al producto interno definido en (\ref{mercer_app}).
+Por otra parte, es necesario caracterizar la positividad de $k(\cdot, \cdot)$ de
+manera tal que se pueda contextualizar dentro del aprendizaje de máquinas, para ello
+se utiliza la noción de matriz de \textbf{Gram}.
+
+\toLatex{3.png}
+
+Esta noción, permite definir la positividad de un kernel $k(\cdot,\cdot)$
+en función de las propiedades que sus matrices de Gram poseen, en este sentido,
+el concepto de \textbf{matriz semidefinida} juega un rol fundamental.
+
+\toLatex{1.png}
+
+Dentro de las propiedades de este tipo de matrices se encuentra la siguiente proposición:
+
+\toLatex{2.png}
+
+Finalmente, se podrá caracterizar la positividad de un kernel $k(\cdot, \cdot)$
+mediante la siguiente proposición:
+
+\toLatex{4.png}
+
+En particular, esto significa que cualquier función simétrica y semidefinida
+positiva, acepta una descomposición por medio del teorema de Mercer y por tanto
+induce una transformación $\Phi$ a un espacio de características (posiblemente
+de dimensión infinita, $N_{\mathcal{H}}=\infty$) donde actúa como un producto interno.
+Si por otra parte, se posee una transformación $\Phi: \mathcal{X} \rightarrow \mathcal{H}$,
+donde $\mathcal{H}$ es un espacio con producto interno, es posible construir un
+kernel por medio de $k(x,x')=\langle \Phi(x), \Phi(x') \rangle_{\mathcal{H}}$.
+Este es por definición, simétrico (lo hereda del producto interno) y además cumple:
+
+\toLatex{5.png}
+
+Por tanto será semidefindo positivo y finalmente un kernel que cumple las condiciones
+del teorema (\ref{mercer}). Esto permite modelar kernels por medio de transformaciones
+conocidas, a la vez que permite asumir la existencia de una transformación dado un kernel.
+
+\section{Espacios de Hilbert con kernel reproductor - RKHS}
+
+Hasta este punto, se puede entender un kernel como una función semidefinida positiva
+y simétrica compatible con una representación, ya sea implícita o explicita,
+de un espacio inicial $\mathcal{X}$ en un espacio con producto interno (o \textit{pre-Hilbertiano}).
+El propósito de esta sección corresponde a estudiar las características de este espacio
+con el fin de obtener herramientas para el uso de kernels en tareas de aproximación
+de funciones.
+
+\toLatex{6.png}
+
+Por definición (punto 2), un RKHS es un espacio formado por combinaciones lineales
+de funciones de la forma $k_{x}(\cdot)$ para todo $x \in \mathcal{X}$ y sus funciones
+limite (clausura). Esto último quiere decir, que toda función $f \in \matchal{H}$
+puede ser aproximada a través de sucesiones de combinaciones lineales de elementos
+de la forma $k_{x}(\cdot)$, que claramente están unicamente determinados por el
+kernel $k(\cdot, \cdot)$.
+
+Por su parte, la propiedad de reproducción (punto 1), se puede comprender al observar
+que para todo $f \in \mathcal{H}$, espacio RKHS correspondiente al kernel $k(\cdot, \cdot)$,
+es posible escribir $f$ como:
+\begin{equation}
+    f(\cdot) = \sum_{i = 1}^{\infty} \alpha_i k(x_i, \cdot)
+\end{equation}
 
 
 
 
-
-Debido a las propiedades geometricas y resultados de aproximación que ofrecen
-los espacios con producto interno,
-
-
-A Reproducing Kernel Hilbert Space (RKHS) is first of all a Hilbert
-space, that is, the most natural extension of the mathematical model
-for the actual space where everyday life takes place (the Euclidean space
-JR3) . When studying elements of some abstract set S it is convenient
-to consider them as elements of some other set S' on which is already
-defined a structure relevant to the problem to be treated . It can be for
-instance an order structure, a vector structure, a metric structure or
-a mixing of algebraic and topological structures. For this we need an
-"imbedding theorem" or a "representation theorem" . Through this kind
-of theorem the study of elements of S is transferred to their "represen-
-ters" in S' and can be carried out using the structure on S' . For their
-richness and simplicity Hilbert spaces are introduced as often as possible
-when a vector structure and an inner product can be exploited. They
-provide powerful mathematical tools and geometric concepts on which
-our intuition can rest. The phrase "RKHS method" is generic to nam e a
-method based on the embedding of the abstract set S into some RKHS
-S'
+Que por el teorema de Mercer verifica:
+\begin{equation}
+    f(x) = \sum_{i = 1}^{\infty} \alpha_i \sum_{j = 1}^{N_{\mathcal{H}}} \lambda_j \psi_j(x_i)\psi_j(x)
+\end{equation}
