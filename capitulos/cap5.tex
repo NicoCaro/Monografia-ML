@@ -1,13 +1,300 @@
 % !TEX root = ../main.tex
 \documentclass[../main.tex]{subfiles}
+\chapter{Anexos}
 
-\chapter{Redes Neuronales}
+\subsection{T\'opicos de An\'alisis}
+\label{apdc:topicos}
 
-\begin{quotation}
-Qué es el \textit{deep learning}: \\
-Un comerciante en datos y códigos? \\
-Un sacerdote que no cree en nada?
+\subsubsection{Normas}
+\label{padc:normas}
 
-\NC{Poner algo profundo por el estilo. (?)}
+Una norma sobre $\mathbb{R}^{n}$  es una funcion $ f(x): \mathbb{R}^{n} \rightarrow \mathbb{R} $ que satisface las siguientes propiedades:
 
-\end{quotation}
+\begin{align*}
+(1)~~& f(x) \geq 0 &x \in \mathcal{R}^{n} ~~ (f(x) =0 ~\text{si y solo si}~ x=0)\\
+(2)~~& f(x+y) \leq f(x)+ f(y) &x, y \in \mathcal{R}^{n} \\
+(3)~~& f(\alpha x) = \mid \alpha \mid f(x)  &\alpha \in \mathcal{R}, x \in \mathcal{R}^{n}
+\end{align*}
+
+Una norma $ f(\cdot) $ cumpliendo lo anterior, se denota por $ f(x)= || x ||$. Ejemplos de normas son:
+
+\begin{align*}
+|| x || _{p}~ &=( \mid x_{1}^{p} \mid+...+\mid x_{n}^{p}\mid)^{1/p}, ~~ p \geq 1\\
+||x||_{1}~ &=  \mid x_1 \mid +...+ \mid x_n \mid  \\
+||x||_{2}~ &= ( x^{T} x)^{1/2} 	\\
+||x||_{\infty} &= max_{1 \leq i \leq n } \mid x_i \mid
+\end{align*}
+
+En la pr\'actica, si no se especifica la norma $||x||$ se asume por la norma-2 $ ||x||_{2} $. Se puede adem''as definir la noci\'on de angulo $\theta$ entre los vectores $x$ e $y$ a trav\'es de la norma y el producto entre ellos:
+
+\begin{center}
+	$ cos (\theta)= \dfrac{x^{T} y}{{|| x ||}_{2} {|| y||}_{2}}$
+\end{center}
+
+\subsubsection{Cauchy Schwarz}
+\label{apdc:CS}
+
+Sea $ E $ un espacio vectorial real y sea $ \langle \cdot ,\cdot\rangle: E \rightarrow \mathbb{R} $ una funci\'on positiva, sim\'etrica  y bilinear, es decir:
+
+\begin{enumerate}
+	\item $  \langle x, x\rangle \geq 0 $
+	\item $  \langle x, y\rangle = \langle y,x\rangle$
+	\item $  \langle \alpha x+ y,z\rangle=\alpha \langle x, z\rangle + \langle y,z\rangle$
+\end{enumerate}
+Para todo $ x,y,z \in E $, $ \alpha \in \mathbb{R} $.  Se quiere demostrar que $ \langle \cdot , \cdot
+\rangle $ cumple la desigualdad de Cauchy-Schwarz, es decir:
+
+\begin{equation*}
+|\langle x,y \rangle|^2 \leq \langle x,x \rangle \cdot \langle y,y \rangle ~~~~~~ x,y \in E
+\end{equation*}
+
+\begin{proof}
+	Sean $ x,y \in E $ y $ \alpha \in \mathbb{R} $, debido a la positividad de $ \langle \cdot,\cdot \rangle $ se cumple:
+
+	\[ 0 \leq \langle \alpha x+y, \alpha x+y\rangle  \]
+
+	Lo cual, aplicando la bilinearidad y simetr\'ia de $ \langle \cdot,\cdot \rangle $, se puede reescribir en la forma:
+
+	\[ 0 \leq \alpha^2 \langle x,x\rangle + 2\alpha \langle x,y \rangle + \langle y,y \rangle  \]
+
+	Si  $ \langle x,x \rangle = 0 $ o $ \langle y,y \rangle = 0 $, la desigualdad se cumple de manera trivial. Por otra parte, nuevamente debido a la positividad de $ \langle \cdot,\cdot\rangle $, si $ \langle x,x \rangle > 0$, tomar $ \alpha = -\frac{\langle x,y \rangle}{\langle x,x \rangle} $ reduce la expresi\'on anterior a:
+
+	\[ 0 \leq -\frac{|\langle x,y\rangle|^2}{\langle x,x \rangle} + \langle y,y \rangle \]
+
+
+	De la arbitrariedad de $ x,y \in E $ se concluye la afirmaci\'on buscada.
+\end{proof}
+\subsection{Tópicos de Teoría de la Medida}
+
+\begin{definition}[medida]
+Sea $X$ un conjunto y $\mathcal{C} \subseteq \mathcal{P}(X)$ tal que $\varphi \in \mathcal{C}$. Una función:
+	\begin{equation*}
+		\mu : \mathcal{C} \rightarrow \overline{\mathbb{R}}_{+}
+	\end{equation*}
+Se dice que es una \textbf{medida} sobre $\mathcal{C}$ si satisface:
+\begin{enumerate}
+	\item $\mu(\varphi)=0$
+	\item Si $(A_{n}) _{n \in \mathbb{N}} \subseteq \mathcal{C}$   es una sucesi\'on de conjuntos disjuntos tales que $\bigcup_{n \in \mathbb{N}} A_n \in\mathcal{C}$, entonces:
+
+	\begin{equation*}
+	\mu(\bigcup_{n \in \mathbb{N}} A_{n})= \sum_{n \in \mathbb{N}}\mu(A_{n})
+	\end{equation*}
+	(esta propiedad se llama $\sigma$-aditividad).
+\end{enumerate}
+
+\end{definition}
+
+\begin{definition}[$\sigma$-álgebra]
+	$\mathcal{T} \subseteq \mathcal{P}(X)$ se dice que es una $\sigma$-\'algebra si:
+	\begin{enumerate}
+	\item $X \in \mathcal{T}$
+	\item $A,B \in \mathcal{T} \Rightarrow A\setminus B \in \mathcal{T}$
+	\item $(A_n)_{n \in \mathbb{N}} \subseteq \mathcal{T} \Rightarrow \bigcup_{n \in \mathbb{N}} (A_n) \in \mathcal{T}$
+	\end{enumerate}
+\end{definition}
+
+
+	Si tenemos un conjunto $X$, una $\sigma$-álgebra $ \mathcal{T} \subseteq \mathcal{P}(X)$, y una medida $\mu$ sobre $\mathcal{T}$, lo identificaremos con la tupla:
+	\begin{equation*}
+	(X,\mathcal{T},\mu)
+	\end{equation*}
+
+\begin{definition}{(Medida $\sigma$-finita)}
+Sea $\mathcal{C} \subseteq \mathcal{P}(X)$ tal que $\phi \in \mathcal{C}$. Una medida $\mu : \mathcal{C} \rightarrow \overline{\mathbb{R}}_{+}$ se dirá:
+
+\begin{enumerate}
+	\item $\sigma$-\textit{finita} si:
+	\begin{equation*}
+	\exists (A_{n})_{n \in \mathbb{N}}\subseteq \mathcal{C} ~tal ~que ~ X=\bigcup_{n \in \mathbb{N}}A_{n} ~y ~ \mu(A_{n}) < +\infty, ~~\forall n \in \mathbb{N}
+	\end{equation*}
+	\item \textit{finita} si:
+	\begin{equation*}
+	 \mu(A_{n}) < +\infty, ~~\forall A \in \mathcal{C}
+	\end{equation*}
+
+\end{enumerate}
+
+\end{definition}
+
+
+\subsection{Funciones Simples}
+\begin{definition}{(Función Simple)}
+	Sea $(X, \mathcal{T})$ un espacio medible. Una función:
+\begin{equation*}
+f:X \rightarrow \mathbb{R}
+\end{equation*}
+se dirá simple si:
+\begin{equation*}
+\exists (A_i)_{i=1}^{n}\subseteq \mathcal{T}, ~~\exists(a_{i})_{i=1}^{n} \subseteq \mathbb{R} ~~~tal ~que~~ ~f(x)=\sum_{i=1}^{n}a_{i}1_{A_i}(x)
+\end{equation*}
+Denotaremos por $\xi=\xi(X,\mathcal{T},\mathbb{R})$ al conjunto de todas las funciones simples a valores reales. Análogamente denotaremos por $\xi_{+}=\xi(X,\mathcal{T},\mathbb{R}_{+})$ al conjunto de funciones simples a valores en $\mathbb{R}_{+}$.\\
+Notemos que si $f$ es una función simple, entonces existe $(A_i)_{i=1}^{n}$ partición medible de $X$ tal que:
+
+\begin{equation*}
+f(x)=\sum_{i=1}^{n}a_{i}1_{A_i}(x)
+\end{equation*}
+\end{definition}
+
+
+\subsection{Definición de la integral}
+\begin{definition}{(Integral)}
+Sea $(X,\mathcal{T},\mu)$ un espacio de medida. Sea $f \in \xi_{+}$, digamos $f(x)=\sum_{i=1}^{n}a_{i}1_{A_i}(x)$, con $(A_i)_{i=1}^{n}$ partición medible de $X$. Se define la \textbf{integral} de $f$ como:
+\begin{equation*}
+\int f d\mu:=\sum_{i=1}^{n}a_{i}\mu(A_i) \in \overline{\mathbb{R}}_{+}
+\end{equation*}
+\end{definition}
+
+\subsection{Completitud de un espacio de medida}
+\begin{definition}{(Conjunto Despreciable)}
+	Sea $(X,\mathcal{T},\mu)$ un espacio de medida. Un conjunto $N \in \mathcal{P}(X)$ se dice que es un \textbf{despreciable} si:
+
+\begin{equation*}
+\exists A \in \mathcal{T}~~tal~~que~~~~ N \subseteq A ~~~~y~~~~ \mu(A)=0
+\end{equation*}
+La $\sigma$-álgebra $\mathcal{T}$ se dirá completa si contiene a todos los despreciables.
+\end{definition}
+
+\begin{definition}
+Si $(X,\mathcal{T},\mu)$ un espacio de medida y  $p:X \rightarrow \left \lbrace {V,F } \right \rbrace $ una proposición (V=verdadero, F=falso). Se dirá que la proposición $p$ \textbf{se satisface en casi todas partes}( lo cual se abrevia ctp ó $\mu$-ctp) si el siguiente conjunto:
+\begin{equation*}
+\left \lbrace x \in X / p(x)=F \right \rbrace
+\end{equation*}
+
+es un despreciable para $(X,\mathcal{T},\mu)$.
+\end{definition}
+
+\subsection{Probabilidad}
+
+Sea $( \Omega , \mathcal { B } , \mathbb { P } )$ espacio de probabilidades, donde :
+\begin{itemize}
+  \item  $\Omega$ : espacio muestral
+  \item $ \mathcal { B } $ sigma álgebra
+  \item  $\mathbb { P }$: ley de probabilidades
+\end{itemize}
+
+A continuación se definen algunos conceptos de probabilidad de tal manera de explicar  teoremas y proposicones que  seutilizarón a lo largo del texto.
+
+\begin{definition}
+Probabilidad Condicional: $\mathbb { P } ( X | Y ) = \frac { \mathbb { P } ( X , Y ) } { \mathbb { P } ( Y ) }$
+\end{definition}
+
+\begin{definition}
+independencia: $X \perp Y \Longleftrightarrow \mathbb { P } ( X , Y ) = \mathbb { P } ( X ) \mathbb { P } ( Y )$
+\end{definition}
+
+\begin{definition}
+Independencia Condicional: $X \perp Y | E \Longleftrightarrow \mathbb { P } ( X , Y | E ) = \mathbb { P } ( X | E ) \mathbb { P } ( Y | E )$
+\end{definition}
+
+A partir de esto, se pueden formular los siguientes teoremas:
+\begin{proposition}
+Teorema de Bayes: Se define como $\mathbb { P } ( X | E ) = \frac { \mathbb { P } ( E | X ) \mathbb { P } ( X ) } { \mathbb { P } ( E ) }$ , donde $\mathbb { P } ( X | E )$ es la distribucion a posteriori de $X$ dado $E$. $\mathbb { P } ( E | X )$  es la verosimilitud de los datos. $\mathbb { P } ( X )$ es la probabilidad a priori de $X$  y $\mathbb { P } ( E )$ es la probabilidad de los datos.
+\end{proposition}
+
+\begin{proposition}
+  Regla de la Cadena:  Sean $X _ { 1 } , \ldots , X _ { N }$ eventos medibles, entonces la probabilidad conjunta puede expresarse como:
+
+$\mathbb { P } \left( X _ { 1 } , \ldots , X _ { N } \right) = \mathbb { P } \left( X _ { 1 } \right) \prod _ { i = 2 } ^ { N } \mathbb { P } \left( X _ { i } | X _ { 1 } , \ldots , X _ { i - 1 } \right)$
+\end{proposition}
+
+\begin{proposition}
+Regla de la Marginación: Sea $\left\{ E _ { i } \right\} _ { i \in \mathbb { N } }$ una partición  de $\Omega$ , tales que $\bigcup _ { i \in \mathbb { N } } E _ { i } = \Omega$ entonces:
+  \begin{equation*}
+  \mathbb { P } ( X ) = \sum _ { i \in \mathbb { N } } \mathbb { P } ( X | E _ { i } ) \mathbb { P } \left( E _ { i } \right)
+  \end{equation*}
+\end{proposition}
+
+\begin{proposition}
+Dos eventos $X$ e $Y$ son independientes si y solo si la distribución a priori y a posteriori son iguales, es decir,  $X \perp Y \Longleftrightarrow \mathbb { P } ( X | Y ) = \mathbb { P } ( X )$
+\end{proposition}
+\begin{proposition}
+Dos eventos $X$ e $Y$ son independientes condicionados al evento $E$ si y solo si, la distribución a posteriori de $X$ dado $Y$, $E$ es igual a la distribución a posteriori de $X$ dado solo $E$, es decir $X \perp Y | E \Longleftrightarrow \mathbb { P } ( X | Y , E ) = \mathbb { P } ( X | E )$
+\end{proposition}
+
+\begin{definition}
+Una variable aleatoria $x$ es una función de $\Omega$ 	a valores en $\mathbb{R}$, es decir, $x ( \omega ) \in \mathbb { R } \operatorname { con } \omega \in \Omega$
+\end{definition}
+
+\begin{definition}
+Dada una variable aleatoria $x$, se define su esperanza y varianza de la siguiente manera:
+
+
+\begin{equation*}
+\left.\begin{aligned} \mu _ { x } & = \mathbb { E } [ x ] = \int _ { \Omega } x ( \omega ) d \mathbb { P } ( \omega ) \\ \sigma _ { x } ^ { 2 } & = \mathbb { V } [ x ] = \int _ { \Omega } \left( x ( \omega ) - \mu _ { x } \right) ^ { 2 } d \mathbb { P } ( \omega ) \end{aligned} \right.
+\end{equation*}
+\end{definition}
+
+\begin{definition}
+Dada una variable aleatoria $x$, se dice que $x$ sigue una distribución de probabilidades $F(c)$ si se cumple que $\mathbb { P } ( \omega : x ( \omega ) \leq c ) = F ( c )$ .Se dice que $x$  tiene función de densidad $p(x)$  si se cumple 	que:
+\begin{equation*}
+F ( c ) = \int _ { - \infty } ^ { c } p ( x ) d x = \int _ { \omega : x ( \omega ) \leq c } d \mathbb { P } ( \omega )
+\end{equation*}
+\end{definition}
+
+Se conoce como el soporte de la distribución $F$  a la imagen de la variable aleatoria $i m ( x ) = x ( \Omega ) \subseteq \mathbb { R }$.\\
+Si el soporte de $F$ es numerable entonces se dirá que la variable aleatoria sigue una distribucion discreta, en caso contrario, se dirá que es una distribución continua.  Para el primer caso, se utilizan sumatorias:
+
+\begin{equation*}
+\left.\begin{aligned} F ( c ) & = \sum _ { i \leq c } p _ { i } \\ p ( x ) & = \sum _ { i \leq c } p _ { i } \delta _ { i } ( x ) \end{aligned} \right.
+\end{equation*}
+Donde $ \delta _ { i }$ corresponde a la función delta dirac.
+
+
+\begin{proposition}
+    Dada una variable aleatoria $x$ , su esperanza y varianza son:
+
+\begin{equation*}
+\left.\begin{aligned} \mu _ { x } & = \mathbb { E } [ x ] = \int _ { \mathbb { R } } x p ( x ) d x \\ \sigma _ { x } ^ { 2 } & = \mathbb { V } [ x ] = \int _ { \mathbb { R } } \left( x - \mu _ { x } \right) ^ { 2 } p ( x ) d x \end{aligned} \right.
+\end{equation*}
+
+\end{proposition}
+
+\subsection{T\'opicos de Optimizaci\'on}
+
+\subsubsection{Problema de Optimizaci\'on con Restricciones, Lagrangiano}
+
+Sea el problema de optimizaci\'on con restricciones:
+
+
+\begin{align*}
+min ~~  & f(x) ~~ x \in \mathbb{R}^{n}\\
+s.a  ~~&c_{i}(x)=0, ~~i \in 	\mathcal{C}_{E}\\
+&c_{i}(x)\geq 0,~~i \in 	\mathcal{C}_{I}
+\end{align*}
+
+donde $f(x)$ es la funci\'on objetivo, $c_{i}$ con $ i =1,2,...,p$ son las funciones de restricci\'on, $\mathcal{C}_{E}$ es el conjunto de indices de las restricciones de igualdad en el problema y $\mathcal{C}_{I}$ es el conjunto de restricciones de desigualdad. Cualquier punto que satisface todas las restricciones es llamado un punto factible y el conjunto de todos aquellos puntos es referido como la regi\'on factible. Se definen las restricciones activas en un punto $x'$ por el conjunto de indices $ \mathcal{A}(x')= \left\lbrace i :  c_{i}(x')=0 \right\rbrace$ tales que cualquier restricci\'on es activa en $x'$  si $ x'$ esta en el borde o en la regi\'on factible. En este contexto se define el Lagrangiano por:
+
+\begin{equation*}
+\mathcal{L}(x,\lambda)= f(x) - \sum_{i} \lambda_{i} c_{i}(x)
+\end{equation*}
+
+\subsubsection{Condiciones KKT}
+\label{apdc:KKT}
+
+En un problema de optimizaci\'on con restricciones se tiene como condici\'on necesaria de primer orden lo siguiente:
+
+Si $ x^{*} $ es un m\'inimo local del problema de optimizaci\'on con restricciones y se mantiene cierta regularidad alrededor de $ x^{*} $, entonces existen multiplicadores de Lagrange $\lambda^{*}$ tales que $ x^{*} $, $\lambda^{*}$ satisfacen el siguiente sistema:
+
+\begin{align*}
+\nabla_x \mathcal{L}(x,\lambda)  &= 0 \\
+c_{i}(x)&=0 ~~~~~~ i \in \mathcal{C}_{E}\\
+c_{i}(x)& \geq 0 ~~~~~~ i \in \mathcal{C}_{I}\\
+\lambda_{i}& \geq 0 ~~~~~~ i \in \mathcal{C}_{I}\\
+\lambda_{i}c_{i}(x)&= 0 ~~~~~~\forall~~ i \\
+\end{align*}
+
+El cual consiste en las llamadas condiciones de Karush-Kuhn-Tucker (KKT). Un punto $ x^{*} $ que satisface las condiciones se refiere como punto KKT. La \'ultima conidici\'on $\lambda_{i}c_{i}(x)= 0$ es llamada \textit{condici\'on de complementariedad} y afirma que $\lambda_{i}$ y $c_{i}$ no pueden ser ambos distintos de cero, o equivalentemente que las restricciones inactivas tienen un multiplicador igual a cero. Si no existe ${i}$   tal que $\lambda^{*}_{i}=c^{*}_{i}(x)=0	$ entonces se mantiene una complementariedad estricta. En cambio si $\lambda^{*}_{i}=0$ se denomina fuertemente activa , $c^{*}_{i}>0$ d\'ebilmente activa $\lambda^{*}_{i}=c^{*}_{i}=0$ e inactiva si $\lambda^{*}_{i}=0$, $c^{*}_{i}>0$.
+
+Las Condiciones de segundo orden pueden ser expresadas en t\'erminos de la matriz Hessiana con respecto a $x$ del Lagrangiano $\nabla^{2}_x \mathcal{L}(x^{*},\lambda^{*})= \nabla^{2}f(x^{*})- \sum_{i}\lambda^{*}_{i}\nabla^{2} c_{i}(x^{*}) $.
+
+\subsubsection{Problema de Programaci\'on Cuadr\'atica}
+\label{apdc:QP}
+
+Un problema de programaci\'on cuadr\'atica es de la forma:
+\begin{align*}
+Minimizar ~~  & q(x)= \frac{1}{2}x^{T}Gx + g ^{T} x\\
+sujeto ~a~~~    & a_{i}^{T}x= b_{i}, ~~ i \in \mathcal{C}_{E}\\
+& a_{i}^{T}x \geq b_{i}, ~~ i \in \mathcal{C}_{I}\\
+\end{align*}
+
+Si la matriz Hessiana \textit{G} es semidefinida positiva, la solucion $ x^{*}$ es global.Si \textit{G} es definida positiva la soluci\'on $ x^{*}$ es global y \'unica. Cuando la Hessiana es indefinida puede existir otra soluci\'on local que la soluci\'on global.

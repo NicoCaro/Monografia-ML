@@ -10,6 +10,7 @@
 \usepackage[utf8]{inputenc} % Acentos simples
 \usepackage{bm} % Simbolos matematicos en negrita
 
+\usepackage[ruled, linesnumbered]{algorithm2e}
 
 % Modelos Graficos
 \usepackage{tikz}
@@ -22,28 +23,47 @@
 \robustify{\subref}
 
 % TODO personalisados
-\usepackage{todonotes} % Notas
+\usepackage[disable]{todonotes}
+%\usepackage{todonotes} % Notas
 \newcommand\NC[1]{\todo[color=green]{NicoCaro: \\ #1}}
 \newcommand\FT[1]{\todo[color=pink!80]{FT: \\ #1}}
 
+\SetKwBlock{Repeat}{repeat}{}
+
 % TOC
-\setcounter{tocdepth}{4}
-\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
 
 % Teoremas
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}[theorem]{Lemma}
+\newtheoremstyle{mytheoremstyle} % name
+    {5pt}                    % Space above
+    {5pt}                    % Space below
+    {}                   % Body font
+    {}                           % Indent amount
+    {\bfseries}                   % Theorem head font
+    {.}                          % Punctuation after theorem head
+    {.5em}                       % Space after theorem head
+    {}  % Theorem head spec (can be left empty, meaning ‘normal’)
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{xca}[theorem]{Exercise}
+\theoremstyle{mytheoremstyle}
+%\newtheorem{thm}{Theorem}{Teorema}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{definition}[theorem]{Definición}
+
+\theoremstyle{plain}
+\newtheorem{example}[theorem]{Ejemplo}
+\newtheorem{xca}[theorem]{Ejercicio}
 
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem{remark}[theorem]{Observación}
 
 \numberwithin{section}{chapter}
 \numberwithin{equation}{chapter}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 % Absolute value notation
 \newcommand{\abs}[1]{\lvert#1\rvert}
@@ -71,13 +91,16 @@
 % Insertar ecuaciones
 \newcommand{\toLatex}[1]{%
 \begin{framed}
-\includegraphics[width=1\columnwidth]{/home/nico/MEGAsync/Doctorado/primer semestre/Seminario AGW - GP/Monografia-ML-master/toLatex/#1}%
+\includegraphics[width=1\columnwidth]{toLatex/#1}%
 \end{framed}
 }
 
 % Inclusion especifica de secciones para debug.
 % \includeonly{preface,chap1,biblio,index}
 \begin{document}
+
+\setlength{\belowdisplayshortskip}{10pt}
+\setlength{\abovedisplayshortskip}{10pt}
 
 \frontmatter
 
@@ -103,11 +126,11 @@
 \subfile{./capitulos/cap2}
 \subfile{./capitulos/cap3}
 \subfile{./capitulos/cap4}
-\subfile{./capitulos/cap5}
-
 
 \backmatter
+\appendix
+\subfile{./capitulos/cap5}
 \subfile{./misc/biblio}
-\subfile{./misc/index}
+%\subfile{./misc/index}
 
 \end{document}

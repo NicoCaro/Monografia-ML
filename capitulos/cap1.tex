@@ -4,11 +4,11 @@
 
 \chapter{Modelos gráficos probabilísticos}
 
-\begin{quotation}
-    El \textit{machine learning} fue un objeto de lujo, pero para nosotros es
-    un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
-	\NC{Poner algo profundo por el estilo. (?)}
-\end{quotation}
+  %\begin{quotation}
+  %    El \textit{machine learning} fue un objeto de lujo, pero para nosotros es
+  %    un artículo de primera necesidad: no podemos vivir sin \textit{machine learning}.
+  %	\NC{Poner algo profundo por el estilo. (?)}
+  %\end{quotation}
 
 \section*{Introducción}
 
@@ -291,8 +291,7 @@ Donde $\bm W_{ts}$ es una matriz de pesos entre los vectores de cada nodo.
 
 Como se mencionó anteriormente, los modelos gráficos encapsulan las relaciones
 de independencia condicional entre las variables aleatorias del fenómeno que
-se modela. En esta sección se estudian las propiedades de los modelos gráficos
-dirigidos en cuanto sus propiedades \NC{terminar intro}
+se modela. En esta sección se estudian las propiedades de los modelos gráficos dirigidos en cuanto a estas relaciones.
 
 En un grafo $G$, se escribe $x_i \perp_{G} x_j | x_k$ si el nodo
 $x_i$ es independiente de $x_j$ dado $x_k$. Se denota por $I(G)$ al conjunto
@@ -437,29 +436,29 @@ La expresión (\ref{eq:full_conditional}) se conoce como \index{condicional comp
 \textbf{condicional completa} del nodo $x_t$.
 \newpage
 
-\section{Modelos gráficos no dirigidos}
-
-Los modelos gráficos dirigidos presentan una alternativa de modelación modular e
-interpretable. Sin embargo, su estructura los hace demasiado rígidos en aplicaciones
-donde las variables interactúan de manera simétrica (datos espaciales y relacionales por ejemplo).
-
-Como alternativa, se encuentran los \index{modelos gráficos no dirigidos} \textbf{modelos gráficos no dirigidos},
-los cuales, como indica su nombre, no requieren el uso de aristas dirigidas y por tanto,
-encapsulan de manera natural la simetría que pierden los modelos dirigidos.
-
-Para ilustrar la Introducción anterior, las figuras \ref{fig:dgm_ugm_a}
-y \ref{fig:dgm_ugm_a} muestran los markov blankets de un nodo para el caso dirigido
-y no dirigido en un arreglo 2d, común en aplicaciones referentes a imágenes y datos espaciales.
-
-\begin{figure}[ht]
-\label{fig:dgm_ugm}
-\subfloat[]{\label{fig:dgm_ugm_a}\input{./figuras/dgm_ugm_a}}
-\quad
-\subfloat[]{\label{fig:dgm_ugm_b}\input{./figuras/dgm_ugm_b}}
-\quad
-\caption{ Modelo gráfico dirigido (izquierda) contrapuesto a uno no dirigido (derecha). En \subref{fig:dgm_ugm_a} el markov blanket de $x_{11}$ añade a $x_8$ y $x_{14}$ a sus vecinos inmediatos, mientras excluye a $x_6$ y $x_16$ en aplicaciones basadas en imágenes, este comportamiento puede no ser el deseado. Por otra parte en \subref{fig:dgm_ugm_b} el nodo $x_{11}$ esta separado del resto solo por sus vecinos inmediatos.}
-\end{figure}
-
-
-
-\section{Inferencia exacta en modelos gráficos}
+%\section{Modelos gráficos no dirigidos}
+%
+%Los modelos gráficos dirigidos presentan una alternativa de modelación modular e
+%interpretable. Sin embargo, su estructura los hace demasiado rígidos en aplicaciones
+%donde las variables interactúan de manera simétrica (datos espaciales y relacionales por ejemplo).
+%
+%Como alternativa, se encuentran los \index{modelos gráficos no dirigidos} \textbf{modelos gráficos no dirigidos},
+%los cuales, como indica su nombre, no requieren el uso de aristas dirigidas y por tanto,
+%encapsulan de manera natural la simetría que pierden los modelos dirigidos.
+%
+%Para ilustrar la Introducción anterior, las figuras \ref{fig:dgm_ugm_a}
+%y \ref{fig:dgm_ugm_a} muestran los markov blankets de un nodo para el caso dirigido
+%y no dirigido en un arreglo 2d, común en aplicaciones referentes a imágenes y datos espaciales.
+%
+%\begin{figure}[ht]
+%\label{fig:dgm_ugm}
+%\subfloat[]{\label{fig:dgm_ugm_a}\input{./figuras/dgm_ugm_a}}
+%\quad
+%\subfloat[]{\label{fig:dgm_ugm_b}\input{./figuras/dgm_ugm_b}}
+%\quad
+%\caption{ Modelo gráfico dirigido (izquierda) contrapuesto a uno no dirigido (derecha). En \subref{fig:dgm_ugm_a} el markov blanket de $x_{11}$ añade a $x_8$ y $x_{14}$ a sus vecinos inmediatos, mientras excluye a $x_6$ y $x_16$ en aplicaciones basadas en imágenes, este comportamiento puede no ser el deseado. Por otra parte en \subref{fig:dgm_ugm_b} el nodo $x_{11}$ esta separado del resto solo por sus vecinos inmediatos.}
+%\end{figure}
+%
+%
+%
+%\section{Inferencia exacta en modelos gráficos}
