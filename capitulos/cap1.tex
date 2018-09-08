@@ -12,7 +12,7 @@
 
 \section*{Introducción}
 
-El eje central de este capitulo se basa en la búsqueda de una representación compacta, para
+El eje central de este capítulo se basa en la búsqueda de una representación compacta, para
 distribuciones de probabilidad conjunta de la forma $p(\bm x | \bm\theta)$. Esto, con
 la intención de realizar inferencia sobre variables y aprendizaje de parámetros de manera
 eficiente. \NC{Mejorar intro, añadir discusión sobre inferencia y aprendizaje.}
@@ -31,7 +31,7 @@ El problema con esta expresión es la dificultad computacional subyacente al cá
 distribuciones condicionales de la forma $p(x_{t} |  x_1,\ldots, x_{t-1} )$
 cuando el número de variables incidentes $t$ aumenta.
 
-\NC{propiedades básicas del calculo de probabilidades (CI por ej.) al apéndice.}
+\NC{propiedades básicas del cálculo de probabilidades (CI por ej.) al apéndice.}
 No obstante, la representación (\ref{eq:regla_cadena}) reduce su complejidad en presencia de
 \index{independencia condicional} \textbf{independencia condicional}.
 
@@ -77,7 +77,7 @@ Todo DAG posee un \index{ordenamiento topológico} \textit{ordenamiento topológ
 los nodos de cualquier DAG pueden ser numerados de manera tal, que todo nodo padre
 posea una numeración inferior a sus nodos hijos. \NC{lema de ordenamiento topológico
 para DAG's en apéndice.} Esta característica permite enriquecer la formulación de la propiedad
-de Markov (\ref{eq:markov_prop}), usando la estructura grafica como componente adicional. De
+de Markov (\ref{eq:markov_prop}), usando la estructura gráfica como componente adicional. De
 esta forma, se puede formular la \index{propiedad ordenada de Markov} \textbf{propiedad ordenada
 de Markov} en modelos gráficos dirigidos:
 \begin{equation}
@@ -97,7 +97,7 @@ ordenada de Markov, se puede descomponer de la forma:
 p(\bm x ) = \prod_{t = 1}^{V} p(x_t  |  \bm x_{pa(t)})
 \end{equation}
 
-\begin{example}[Modelo grafico asociado a $p(\bm x)$]
+\begin{example}[Modelo gráfico asociado a $p(\bm x)$]
 Si se estudia un modelo probabilístico, donde la probabilidad conjunta de las variables
 estudiadas $p(\bm x)$ esta dada por:
 \begin{equation}
@@ -139,7 +139,7 @@ Si se usa este enfoque, se obtiene que la densidad condicional de clases toma la
 \end{equation}
 
 Al parametrizar las distribuciones de densidad condicional, es posible obtener un modelo de
-clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificador naive Bayes}.
+clasificación conocido como \index{clasificador naive Bayes}\textbf{clasificador Naive Bayes}.
  La estructura de las relaciones de independencia inducidas por (\ref{eq:cond_nb}) se pueden
 expresar según (\ref{eq:naive_bayes}) y el modelo gráfico dirigido de la figura \ref{fig:naive_bayes}.
 
@@ -172,7 +172,7 @@ el representante $y_i$.
 \subfloat[]{\label{fig:plate_poly_graph_2}\input{./figuras/plate_poly_graph_2}}
 \quad
 \subfloat[]{\label{fig:plate_poly_graph_final}\input{./figuras/plate_poly_graph_final}}
-\caption{ Modelo grafico dirigido para regresión
+\caption{ Modelo gráfico dirigido para regresión
 polinomial usando notación de placas (o \textit{plates}). En \subref{fig:plate_poly_graph}
 se muestra el grafo correspondiente a (\ref{eq:poly_fact_1}). En \subref{fig:plate_poly_graph_2}
 se añaden los parámetros deterministas y las variables aleatorias observadas. En
@@ -218,7 +218,7 @@ El modelo gráfico dirigido que encapsula estas últimas ecuaciones se aprecia e
 
 \subsection{Modelos gráficos dirigidos gaussianos}
 
-Sea $\mathcal{M}$ un modelo grafico dirigido, en el cual todas las variables son
+Sea $\mathcal{M}$ un modelo gráfico dirigido, en el cual todas las variables son
 reales y sus distribuciones de probabilidad condicional son lineal-gaussianas:
 \begin{equation}
 	\label{eq:gaussian_cpd}
@@ -335,7 +335,7 @@ de las siguiente condiciones:
     o $e$ \textbf{no} es descendiente de algún elemento de $E$.
 \end{enumerate}
 
-Se dice que un conjunto de nodos $A$ esta d-separado de un conjunto de nodos $B$,
+Se dice que un conjunto de nodos $A$ está d-separado de un conjunto de nodos $B$,
 dado un conjunto de nodos $E$, si y solo si, todo camino no dirigido desde cada nodo
 de $A$ a cada nodo de $B$ esta d-separado por $E$.
 
@@ -417,7 +417,7 @@ y $copa(t)$ sus copadres \footnote{nodos que comparten hijos con $x_t$}. En la
 figura \ref{fig:grafo_ejemplo} se tiene por ejemplo $mb(5) = \lbrace x_6, x_1, x_3, x_4 \rbrace$.
 Según la propiedad global de Markov, la presencia de los nodos copadres no parece
 ser necesaria en primera instancia (la dependencia condicional debería recaer
-unicamente en los nodos padres), sin embargo, al definir $\bm x_{-t}$ como el
+únicamente en los nodos padres), sin embargo, al definir $\bm x_{-t}$ como el
 conjunto de nodos distintos a $x_t$, es posible observar que la probabilidad conjunta adquiere
 la forma $p(\bm x) = p(x_t , \bm x_{-t})$. De donde, al marginalizar sobre el
 nodo $x_t$, se obtiene que $p(\bm x_{-t})$ contiene sólo a aquellos nodos del modelo
