@@ -64,37 +64,37 @@ una distribución estacionaria $\pi$ si:
 	\pi ( y ) = \int \pi ( x ) K ( x , y ) d x
 \end{equation}
 
-Una cadena de MArkov se dice irreductible, si puede transitar desde
+Una cadena de Markov se dice irreductible, si puede transitar desde
 cualquier estado $x$ de un espacio de estado discreto a cualquier otro
-estado $y$ en un numero finito de pasos, es decir, si existe $t$ tal que
+estado $y$ en un número finito de pasos, es decir, si existe $t$ tal que
 $K_{xy}^n > 0$. Si una cadena con distribución estacionaria es irreductible,
-la distribución estacionaria es unica y la cadena se dice recurrente
+la distribución estacionaria es única y la cadena se dice recurrente
 positiva. Una cadena recurrente positiva, aperiodica con distribución
 estacionaria $\pi$, cumple para toda distribución inicial $\lambda$ sobre
 sus estados:
 \begin{equation}
 	\lim _ { n \rightarrow \infty } \left\| \lambda K ^ { n } - \pi \right\| = 0
 \end{equation}
-donde $K$ es el operado (o matriz) de transición. Para cadenas de Markov
+donde $K$ es el operador (o matriz) de transición. Para cadenas de Markov
 irreductibles con una única distribución estacionaria $\pi$, según la ley de los grandes números se debe cumplir que el valor esperado de una función $g(x)$ sobre $\pi$ verifica:
 \begin{equation}
 	\mathbb{E} _ { \pi } [ g ( x ) ] = \int g ( x ) \pi ( x ) d x = \lim _ { n \rightarrow \infty } \frac { 1 } { n } \sum _ { i = 1 } ^ { n } g \left( x _ { i } \right)
 \end{equation}
 
-Esta propiedad permite estimar calcular aproximaciones de cantidades especificas de interés a partir de una cadena de Markov. Los algoritmos que utilizan tal resultado se conoce como métodos MCMC.
+Esta propiedad permite estimar calcular aproximaciones de cantidades específicas de interés a partir de una cadena de Markov. Los algoritmos que utilizan tal resultado se conoce como métodos MCMC.
 
-Una cadena con distribución estacionara $\pi$ se dice reversible si el par $(x_t,x_{t+1})$ tiene la misma distribución conjunta que $(x_{t+1},x_{t})$. En terminos del operador de transición $K$, esto se traduce como
+Una cadena con distribución estacionaria $\pi$ se dice reversible si el par $(x_t,x_{t+1})$ tiene la misma distribución conjunta que $(x_{t+1},x_{t})$. En términos del operador de transición $K$, esto se traduce como
 \begin{equation}
 \pi \left( x _ { t } \right) K \left( x _ { t } , x _ { t + 1 } \right) = \pi \left( x _ { t + 1 } \right) K \left( x _ { t + 1 } , x _ { t } \right)
 \end{equation}
 
 Una cadena de Markov no necesariamente debe ser reversible para poseer una
 distribución estacionaria. Sin embargo, la reversibilidad de una cadena,
-garantiza la existencia de una distribución estacionaria. Esta es la razon
-por la cual se busca que en la mayoria de los algotimos MCMC se cumpla esta
+garantiza la existencia de una distribución estacionaria. Esta es la razón
+por la cual se busca que en la mayoría de los algoritmos MCMC se cumpla esta
 propiedad (\textit{balance detallado}).
 
-\section{Algorimo Metropolis Hastings (MH)}
+\section{Algoritmo Metropolis Hastings (MH)}
 
 El algoritmo canónico MCMC se conoce como Metropolis-Hastings. Su
 formulación pasa por obtener muestras de una distribución $p(x)$ en un
@@ -139,7 +139,7 @@ pesadas.
 
 \subsection{Metropolis simétrico}
 
-Seleccionando  $q(y | x) = q(x|y)$, esta opción simplica la probabilidad de aceptación a $\min \{ 1 , f ( y ) / f ( x ) \}$.
+Seleccionando  $q(y | x) = q(x|y)$, esta opción simplifica la probabilidad de aceptación a $\min \{ 1 , f ( y ) / f ( x ) \}$.
 
 \section{Muestreo de Gibbs}
 
@@ -180,7 +180,7 @@ De donde al integrar en ambos lados
 \end{equation}
 
 Luego, $p$ es la distribución estacionaria de la cadena de Markov formada
-por el kernel de transición $K(x{t+1}|x_t)$. El método de muestreo de Gibbs con el kernel propuesto no es reversible. Otra caracterisitca de este método, es que puede verse como un caso especial del metodo MH con coeficiente de aceptacion $\min \left( 1 , \frac { p ( y ) q ( x | y ) } { p ( x ) q ( y | x ) } \right) = 1$, de esto, al observar $\bm{y}_{-i} = \bm{x}_{-i}$ se tiene:
+por el kernel de transición $K(x{t+1}|x_t)$. El método de muestreo de Gibbs con el kernel propuesto no es reversible. Otra característica de este método, es que puede verse como un caso especial del metodo MH con coeficiente de aceptación $\min \left( 1 , \frac { p ( y ) q ( x | y ) } { p ( x ) q ( y | x ) } \right) = 1$, de esto, al observar $\bm{y}_{-i} = \bm{x}_{-i}$ se tiene:
 
 \begin{align}
 	p ( \bm{y} ) q ( \bm{x} | \bm{y} ) & = p \left( y _ { i } | \bm{y}_{- i} \right) p \left( \bm{y} _ { - i } \right) p \left( x _ { i } | \bm{y} _ { - i } \right) = p \left( y _ { i } | \bm{x} _ { - i } \right) p \left( \bm{x} _ { - i } \right) f \left( \bm{x} _ { i } | \bm{x} _ { - i } \right) \\
@@ -199,7 +199,7 @@ MWG (Metropolis within Gibbs).
 Si bien la formulación de los algoritmos MCMC estudiados hasta el momento
 garantizan convergencia a la distribución que se desea muestrear, no se
 especifica a priori el número de iteraciones necesarias para alcanzar esta
-convergencia. Para abordar este problema se estudian esquemas de diagnostico
+convergencia. Para abordar este problema se estudian esquemas de diagnóstico
 capaces de detectar fallas en la convergencia en este tipo de algoritmos.
 
 \subsection{Tamaño efectivo de muestra}
@@ -212,9 +212,9 @@ incertidumbre $\sigma_{x}$, es necesario obtener alrededor de $n=1000$
 muestras.
 
 Debido a la correlación existente en los puntos de una cadena MCMC, el
-calculo anterior no se verifica (las muestras no son independientes). No
-obstante, es posible medir que tan correlacionados están
-estos punto entre si, por medio del calculo de la autocorrelación, esta se
+cálculo anterior no se verifica (las muestras no son independientes). No
+obstante, es posible medir qué tan correlacionados están
+estos punto entre si, por medio del cálculo de la autocorrelación, esta se
 define por:
 \begin{equation}
 	\rho _ { x x } ( t ) = \frac { \mathbb { E } \left[ \left( x _ { i } - \overline { x } \right) \left( x _ { i + t } - \overline { x } \right) \right] } { \mathbb { E } [ \left( x _ { i } - \overline { x } \right) ^ { 2 } ] }
@@ -235,10 +235,10 @@ la correlación  integrada obteniéndose:
 
 De esta forma, para muestras correlacionadas, la varianza pasa a ser $2 ~
 \tau _ {int,x}$ veces mayor con respecto a la variancia sobre muestras
-independientes. Usando $\tau _ {int,x}$ es posible medir el \textit{numero
+independientes. Usando $\tau _ {int,x}$ es posible medir el \textit{número
 efectivo} de muestras independientes en una cadena correlacionada calculado
 $n/(2 ~ \tau _ {int,x})$ para luego usar esta cantidad para decidir si la
-cantidad de muestras es suficiente, en el caso de la media se busca como heurística un numero efectivo de muestras mayor a 1000.
+cantidad de muestras es suficiente, en el caso de la media se busca como heurística un número efectivo de muestras mayor a 1000.
 
 \subsection{Varianza entre cadenas}
 
@@ -286,7 +286,7 @@ de dimensionalidad extremadamente alta, los algoritmo tradicionales MCMC
 comienzan a presentar problemas. La formulación HMC (Monte Carlo
 Hamiltoniano) introduce una variable auxiliar de \textit{momentum} $u$ para
 para cada variable $x$. La distribución log posterior $\pi(x)$ se considera
-como el potencial de energia $U(x) = -\ln \pi(x)$ donde el momentum define
+como el potencial de energía $U(x) = -\ln \pi(x)$ donde el momentum define
 la energía cinética $K(u)$. De esta forma se define el \textit{Hamiltoniano} $H(x,u) = U(x) + K(u)$, donde $K(u) = u^2/2$. La distribución a explorar corresponde a
 
 \begin{equation}
@@ -307,8 +307,8 @@ por el usuario.
 
 \section{Inferencia variacional}
 
-En esta sección, se estudia un método de aproximación de distribucioness
-conocido como inferencia variacional (\textbf{VI} por sus siglas en ingles).
+En esta sección, se estudia un método de aproximación de distribuciones
+conocido como inferencia variacional (\textbf{VI} por sus siglas en inglés).
 En general, la aproximación por inferencia variacional tiende a ser más rápida y fácil de
 escalar a datos de gran tamaño en comparación al muestreo por \textbf{MCMC}. Por tal motivo, se ha hecho presente en análisis de documentos
 a gran escala y problemas de neurociencia computacional.
@@ -331,7 +331,7 @@ ve regulada por la estructura $\mathcal{Q}$. Por tanto, se busca modelar $\mathc
 La idea clave tras el proceso de aproximación por inferencia variacional,
 pasa por resolver su problema de optimización subyacente. Desde este punto
 de vista, $\mathcal{Q}$ se puede escoger como una familia de funciones
-parametrizadas, por tanto, el problema de encontrar la función optima
+parametrizadas, por tanto, el problema de encontrar la función óptima
  $q^* (\cdot)$ se transforma en encontrar los parámetros que la caracterizan. Para definir esta optimalidad, en la aproximación, se utiliza la divergencia de \textit{Kullback Leibler} ($\mathtt{KL}$), dada por:
 
 \begin{equation}
@@ -342,26 +342,26 @@ parametrizadas, por tanto, el problema de encontrar la función optima
 La densidad variacional obtenida de esta forma, sirve para representar la densidad condicional exacta.
 
 En el contexto inicial, si $\bm{x} = x_1, \ldots, x_n$ es un conjunto de variables observadas y $\bm{z}=z_1, \ldots, z_m$ variables latentes, con
-densidad conjunta $p(\bm{z},\bm{x})$. El problema de inferencia, cosiste en calcular la densidad condicional de las variables latentes dadas las observaciones, $p(\bm{z}|\bm{x})$, esta se puede escribir como:
+densidad conjunta $p(\bm{z},\bm{x})$. El problema de inferencia, consiste en calcular la densidad condicional de las variables latentes dadas las observaciones, $p(\bm{z}|\bm{x})$, esta se puede escribir como:
 
 \begin{equation}
 		p(\bm{z}|\bm{x})=\frac{p(\bm{z},\bm{x})}{p(\bm{x})}.
 \end{equation}
 
-Donde el denominador contiene la densidad marginal de las observaciones, también llamada la \textit{evidencia}. Al marginalizar sobre las variables latentes, se obtiene
+Donde el denominador contiene la densidad marginal de las observaciones, también llamada la \textit{evidencia}. Al marginalizar sobre las variables latentes, se obtiene:
 
 \begin{equation}
 		\label{eq:3_a}
 		p(\bm{x})=\int{p(\bm{z},\bm{x})d\bm{z}}.
 \end{equation}
-La dificultad de este proceso, recae en el calculo de esta integral, pues por lo general no se tiene su forma cerrada o se requiere de recursos computacionales prohibitivos para obtenerla. A modo de ejemplo se estudia el siguiente modelo:
+La dificultad de este proceso, recae en el cálculo de esta integral, pues por lo general no se tiene su forma cerrada o se requiere de recursos computacionales prohibitivos para obtenerla. A modo de ejemplo se estudia el siguiente modelo:
 
 \subsection{GMM Bayesiano I}
 
 Se considera un \textbf{GMM} (modelo de mezcla de Gaussianas)  de $C$ componentes, univariado y de varianza unitaria. Cada una de sus componentes
 corresponden a distribuciones Gaussianas con medias $\bm{\mu} = \left\{\mu_1,\dots,u_C\right\}$.
 
-Los parámetros correspondientes a las medias se obtienen independientemente según su distribución prior $p(\mu_k)$, que se supondrá $\mathcal{N}(0,\sigma^2)$, donde la varianza prior $\sigma^2$ corresponde a un hiperparámetro.
+Los parámetros correspondientes a las medias se obtienen independientemente según su distribución prior $p(\mu_k)$, que se supondrá $\mathcal{N}(0,\sigma^2)$, donde la varianza prior $\sigma^2$ corresponde a un híperparámetro.
 
 Para generar una observación $x_i$ del modelo, es necesario generar una
 asignación de cluster, esta se denota por $c_i$ e indica de qué cluster
@@ -390,14 +390,14 @@ En este modelo, las variables latentes corresponden a $\bm{z} = \left\{\bm{\mu},
 		\label{eq:8}
 		p(\bm{x})=\int{p(\bm{\mu})\displaystyle\prod_{i=1}^{n}\sum_{c_i}p(c_i)p(x_i|c_i,\bm{\mu})}d\bm{\mu}.
 \end{equation}
-El integrando en la ecuación (\ref{eq:8}) no se puede reduir a un producto de integrales unidimensionales sobre los $\mu_k$. Más aún, la complejidad del tiempo de evaluar numéricamente esta integra $C$-dimensional es $\mathcal{O}(k^n)$.
+El integrando en la ecuación (\ref{eq:8}) no se puede reducir a un producto de integrales unidimensionales sobre los $\mu_k$. Más aún, la complejidad del tiempo de evaluar numéricamente esta integra $C$-dimensional es $\mathcal{O}(k^n)$.
 
 Si por otra parte, se distribuye el producto sobre la suma en (\ref{eq:8}), es posible escribir la evidencia como:
 
 \begin{equation}
 		p(\bm{x})=\sum_{\bm{c}}p(\bm{c})\int{p(\bm{\mu})\displaystyle\prod_{i=1}^{n}p(x_i|c_i,\bm{\mu})}d\bm{\mu}.
 \end{equation}
-Donde debido a la conjugación entre las distribuciones (prior gaussiana), cada integral individual pasa a ser computable. Sin embargo, se deben calcular $k^n$ integrales de este tipo: una para cada configuración de las asignaciones de cluster. El calculo de la evidencia permanece exponencial en $C$ y por tanto intratable.
+Donde debido a la conjugación entre las distribuciones (prior gaussiana), cada integral individual pasa a ser computable. Sin embargo, se deben calcular $k^n$ integrales de este tipo: una para cada configuración de las asignaciones de cluster. El cálculo de la evidencia permanece exponencial en $C$ y por tanto intratable.
 
 \section{Cota inferior para la evidencia}
 
@@ -437,7 +437,7 @@ Es decir, se requiere calcular la evidencia $\log{p (\bm{x})}$, que como se comp
 		\mathtt{\mathtt{ELBO}}(q)=\mathbb{E}\left[\log{p(\bm{z,\bm{x}})}\right]-\mathbb{E}\left[\log{q(\bm{z})}\right].
 \end{equation}
 
-Esta función se denomina cota inferior para la evidencia (\textbf{ELBO} por sus siglas en ingles). De su definición, se observa que $\mathtt{ELBO}(q) = \log{p(\bm{\bm{x}})} - \mathtt{KL}(q(\bm{z})||p(\bm{z}|\bm{x})) $. Cabe
+Esta función se denomina cota inferior para la evidencia (\textbf{ELBO} por sus siglas en inglés). De su definición, se observa que $\mathtt{ELBO}(q) = \log{p(\bm{\bm{x}})} - \mathtt{KL}(q(\bm{z})||p(\bm{z}|\bm{x})) $. Cabe
 destacar, que ${p(\bm{x})}$, es una constante con respecto a $q (\bm{z})$.
 
 Según lo anterior, maximizar la cota $\mathtt{ELBO}$ es equivalente a
@@ -469,10 +469,10 @@ El resultado buscado se obtiene al observar que $\mathtt{KL} (\cdot) \geq 0$.
 \section{Familia variacional mean-field}
 
 En cuanto a la familia $\mathcal{Q}$ sobre la cual se busca aproximar, es necesario que su complejidad de sus complejidad permita resolver el problema
-de optimización subyacente. En esta contexto,  se estudia la familia
+de optimización subyacente. En este contexto, se estudia la familia
 variacional \textit{mean-field}, la cual se define de manera tal que las
 variables latentes son mutuamente independientes, cada una gobernada por un
-parametro distinto en la densidad variacional. Por tanto, si $q \in \mathcal{Q}$ entonces $q(\cdot)$ se podrá expresar como:
+parámetro distinto en la densidad variacional. Por tanto, si $q \in \mathcal{Q}$ entonces $q(\cdot)$ se podrá expresar como:
 
 \begin{equation}
 		\label{eq:15}
@@ -496,7 +496,7 @@ Al modelo GMM bayesiano del ejemplo anterior, se agrega una familia variacional 
 \end{equation}
 
 En este caso,  el factor $q (\mu_k; m_k, s^2_k)$ se modela como una
-distribución gaussiana en la componente $k$-esima con media
+distribución gaussiana en la componente $k$-ésima con media
 $m_k$ y varianza es $s^2_k$. El factor $q(c_i;\varphi_i)$ corresponde a una
 distribución para la $i$-ésima asignación cluster y por tanto, sus
 probabilidades de asignación corresponden a un vector $C$-dimensional
@@ -512,7 +512,7 @@ $\mathtt{ELBO}$ y una familia mean-field adecuada, establecer el problema de
 inferencia variacional y obtener su formulación como un problema de
 optimización. En esta sección, se describe el algoritmo de
 \textbf{inferencia variacional mean-field de coordenadas ascendentes}
-($\mathtt{CAVI}$ por sus siglas en ingles), el cual permite resolver tal
+($\mathtt{CAVI}$ por sus siglas en inglés), el cual permite resolver tal
 problema de optimización.El algoritmo $\mathtt{CAVI}$ optimiza
 iterativamente cada factor de la densidad variacional mean-field, mientras
 mantiene los demás fijos.
@@ -529,15 +529,15 @@ que el factor óptimo $q^{*}_j (z_j)$ verifica,
 El valor esperado en la ecuación (\ref{eq:17}) se calcula con respecto la
 densidad variacional de las variables $\bm{z}_{-j}$ para todo $j = 1,
 \ldots,m$, esta a su vez se expresa como $\prod_{\ell \neq j} q_\ell (z _\ell)$,
-de esta forma, se pueden incluir las variables $\bm{z}_{-j}$ al calculo de
-la probabilidad condicional y excluir del calculo del valor esperado $\mathbb{E}_j$. Por tal motivo, se verifica la siguiente relación de proporcionalidad (sobre la conjunta):
+de esta forma, se pueden incluir las variables $\bm{z}_{-j}$ al cálculo de
+la probabilidad condicional y excluir del cálculo del valor esperado $\mathbb{E}_j$. Por tal motivo, se verifica la siguiente relación de proporcionalidad (sobre la conjunta):
 \begin{equation}
 		\label{eq:18}
 		q_j^*(z_j)\propto \text{exp}\left\{\mathbb{E}_{-j}\left[\log{p(\bm{z}_j,z_{-j},\bm{x})}\right]\right\}.
 \end{equation}
 
 Debido a que todas las variables latentes son consideradas independientes
-(hipotesis mean-field) los valores esperados del lado derecho no involucran
+(hipótesis mean-field) los valores esperados del lado derecho no involucran
 al $j$-ésimo factor variacional. Por tanto la ecuación anterior, permite
 actualizar los factores (coordenadas) de manera iterativa. A continuación se
 presenta este algoritmo:
@@ -545,7 +545,7 @@ presenta este algoritmo:
 \DontPrintSemicolon
 \KwIn{Modelo $p(\bm{x},\bm{z})$ con datos $\bm{x}$}
 \KwOut{Densidad variacional $\prod_{j=1}^{m} q_j(z_j)$}
-\textbf{Inicializar}: Factores variacionels $q_j{(z_j)}$\;
+\textbf{Inicializar}: Factores variacionales $q_j{(z_j)}$\;
 \While{$\mathtt{ELBO}$ no converge}{
 			\For{$j = 1, \ldots, m$}{
 				Calcular $q_j^*(z_j)\propto \text{exp}\left\{\mathbb{E}_{-j}\left[\log{p(\bm{z}_j|z_{-j},\bm{x})}\right]\right\}$
@@ -667,7 +667,7 @@ $\varphi_{ik} = \mathbb{E} [c_{ik}; \varphi_i]$, luego
 \nonumber & = \left(\sum_i \varphi_{ik}x_i\right)\mu_k-\left(1/2\sigma^2+\sum_i\varphi_{ik}/2\right)\mu^2_k+\text{const.}
 \end{align}
 
-El cálculo anterior muestra que la densidad variacional optima por
+El cálculo anterior muestra que la densidad variacional óptima por
 coordenada de $\mu_k$ corresponde a una familia exponencial con estadísticos
 suficientes ${\mu _k, \mu 2 _k}$ y parámetros $\left\{\sum_{i=1}^n
 \varphi_{ik}x_i -1/2\sigma^2-\sum_{i=1}^n\varphi_{ik}/2\right\}$, es decir,
@@ -678,7 +678,7 @@ variacionales, las reglas de actualización para $q _(\mu k)$ son
 		m_k=\frac{\sum_i \varphi_{ik}x_i}{1/\sigma^2+\sum_i \varphi_{ik}}, & s^2_k=\frac{1}{1/\sigma^2+\sum_i \varphi_{ik}}
 \end{eqnarray}
 
-Estas reglas se relacionan fuertemente con la densisdad condicional completa
+Estas reglas se relacionan fuertemente con la densidad condicional completa
 de la para la $k$-ésima componente del modelo. La condicional completa es
 una gaussiana posterior dados los datos asignados a la $k$-ésima componente.
 La actualización variacional corresponde a una condicional completa
@@ -700,7 +700,7 @@ medias de cluster con sus medias variacionales $m _k$.
 
 \begin{algorithm}
 \DontPrintSemicolon
-\KwIn{Datos $x_1,\ldots,x_n$, numero de componentes $C$, varianza prior para las medias de las componentes $\sigma^2$}
+\KwIn{Datos $x_1,\ldots,x_n$, número de componentes $C$, varianza prior para las medias de las componentes $\sigma^2$}
 \KwOut{Densidades variacionales $q(\mu_k;m_k,s_k^2)$ y $q(c_i,\varphi_i)$}
 \textbf{Inicializar}: $\bm{m}= m_1, \ldots m_k$, $\bm{s}^2=s_1 \ldots s_k$, $\bm{\varphi} = \varphi_1, \ldots, \varphi_n$\;
 \While{$\mathtt{ELBO}$ no converge}{
@@ -736,7 +736,7 @@ chi-cuadrado, beta, ...) han sido ampliamente estudiadas y poseen propiedades
 interesantes en cuanto a conjugación prior-posterior, entre otras. Los
 modelos cuyas distribuciones condicionales completas pertenecen a esta
 familia de distribuciones presentan grandes ventajas en cuando a al
-aproximación por medio de inferncia variacional. En esta sección se estudian
+aproximación por medio de inferencia variacional. En esta sección se estudian
 tales propiedades.
 
 \subsection{Condicionales completas en familias exponenciales}
@@ -752,7 +752,7 @@ base, y $ a (\cdot)$ es el log normalizador. Debido a que esta es una
 densidad condicional, el parámetro $\eta _j (\bm{z} _{- j}, \bm{x})$ es una
 función del conjunto condicionante.
 
-En este contexto, la inferencia variacional por medio de dsitribuciones
+En este contexto, la inferencia variacional por medio de distribuciones
 mean-field pasa por ajustar $ q (\bm{z}) = \prod_j q_j (z_j) $. Al suponer
 pertenencia a la familia exponencial, se simplifica la actualización de coordenadas de la ecuación (\ref{eq:17}), en efecto:
 \begin{align}
@@ -776,7 +776,7 @@ de la condicional completa:
 		\nu _j= \mathbb{E}\left[\eta_j(\bm{z}_{-j},\bm{x})\right].
 \end{equation}
 
-Esta transformación permite simplificar los calculos necesarios para
+Esta transformación permite simplificar los cálculos necesarios para
 implementar $\mathtt{CAVI}$.
 
 \subsection{Conjugación condicional y modelos bayesianos}
@@ -799,7 +799,7 @@ corresponden a las componentes de mezcla y la $i$-ésima variable local es la
 asignación de cluster para el dato $x_i$.
 
 En el modelo de la ecuación (\ref{eq:41}) se supondrá, que los términos que
-la componen  hacen que cada condicional completa pertenesca a la familia
+la componen  hacen que cada condicional completa pertenezca a la familia
 exponencial. Para ello, se supondrá que la densidad conjunta
 de cada par $(x_i, z_i)$, condicional a $\beta$, tiene una forma de familia
 exponencial,
@@ -845,7 +845,7 @@ variacional global. El cual posee la misma densidad de familia exponencial
 que la prior. De forma similar, sea $q (z _i | \varphi _i)$ la distribución
 variacional posterior en cada variable local, en este caso, cada $z_i$ rije
 por un parámetro local variacional $\varphi_i$. Este posee la misma densidad
-de familia exponencial que el condicional local completo. El algotitmo
+de familia exponencial que el condicional local completo. El algoritmo
 $\mathtt{CAVI}$ itera entre la actualización de cada parámetro variacional
 local y la actualización del parámetro variacional global.
 La actualización variacional local es
@@ -902,7 +902,7 @@ se ajustan los parámetros globales actuales de una manera apropiada.
 
 \subsection{Gradiente natural de $\mathtt{ELBO}$}
 
-En la optimización basada en gradiente, el termino \textit{gradiente natural}
+En la optimización basada en gradiente, el término \textit{gradiente natural}
 toma en cuenta la estructura geométrica de los parámetros de probabilidad.
 Específicamente, los gradientes naturales deforman el espacio de parámetros
 de una manera sensible, de modo que mover la misma distancia en diferentes
@@ -916,7 +916,7 @@ métrica Riemanniana inversa y la matriz de información Fisher inversa.
 
 Los modelos conjugados condicionalmente poseen gradientes naturales
 simples para la cota $\mathtt{ELBO}$. Para gradientes con respecto al
-parámetro global $\lambda$ se conoce la formula del gradiente euclidiano de $\mathtt{ELBO}$:
+parámetro global $\lambda$ se conoce la fórmula del gradiente euclidiano de $\mathtt{ELBO}$:
 
 \begin{equation}
 		\nabla_\lambda\mathtt{ELBO}=a''(\lambda)(\mathbb{E}_\varphi[\hat\alpha]-\lambda),
@@ -928,9 +928,9 @@ donde $\mathbb{E}_\varphi [\hat\alpha]$ está en la ecuación (\ref{eq:48}). Pre
 		g(\lambda)=\mathbb{E}_\varphi[\hat\alpha]-\lambda.
 \end{equation}
 
-La cual es la diferencia entre las actualizaciones de coordenadas $E_\varphi [\hat\alpha]$ y los parámetros variacionales $\lambda$ en los que se evalua el gradiente.
+La cual es la diferencia entre las actualizaciones de coordenadas $E_\varphi [\hat\alpha]$ y los parámetros variacionales $\lambda$ en los que se evalúa el gradiente.
 
-Es posible usar este gradiente natural en un algoritmo de optimización basad
+Es posible usar este gradiente natural en un algoritmo de optimización basado
 en gradiente. Donde en cada iteración, se actualizan los parámetros globales,
 \begin{equation}
 		\lambda_t=\lambda_{t-1}+\epsilon_t g(\lambda_{t-1}),

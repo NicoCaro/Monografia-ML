@@ -8,7 +8,7 @@
   %$\tilde{ \mathbf { K } } = \bm{K}_{*} - \bm{O}_{*}\bm{K}_{*} - \bm{K}_{*}\bm{O}_{*} + \bm{O}_{*}\bm{K}_{*}\bm{O}_{*}$\;
   %
   %$Z = \tilde{ \mathbf { K } } \bm{V}(:,1:L)$;
-\section{Introducción}
+\section*{Introducción}
 
 Un kernel es una función simétrica y definida positiva $k(\cdot,\cdot)$ que
 puede ser entendida como una medida de similitud entre los argumentos que opera.
@@ -32,9 +32,9 @@ restringirse a los reales, para ciertas aplicaciones puede ser conviene utilizar
 los complejos. En general las propiedades de interés se preservan en ambos cuerpos,
 por lo que por simplicidad se considera solo el caso real en esta monografía.}.
 Dentro de tal clase de funciones, son de importancia a aquellas capaces de ``generalizar"
-el concepto de \textit{porducto interno}, el \index{Teorema de Mercer}
+el concepto de \textit{producto interno}, el \index{Teorema de Mercer}
 \textbf{Teorema de Mercer} permite identificar tal subconjunto.
-\NC{Agregar apéndice sobre Teoria de Medida + integrar respecto a una medida
+\NC{Agregar apéndice sobre Teoría de Medida + integrar respecto a una medida
 learning with Kernels}
 \begin{theorem}[Teorema de Mercer]
 \label{mercer}
@@ -71,7 +71,7 @@ $\Phi: \mathcal{X} ~ \rightarrow ~ l_2^{N_{\mathcal{H}}}$ tal que
 $x ~ \mapsto ~ (\sqrt{\lambda_j} \psi_j(x))_{j=1,\ldots,N_{\mathcal{H}}}$, es decir,
 a cada elemento de $\mathcal{X}$ se le asocia una transformación por medio de las
 funciones propias asociadas a $k(\cdot,\cdot)$ al espacio $l_2^{N_{\mathcal{H}}}$.
-Este último espacio esta provisto de producto interno, por lo que es posible expresar
+Este último espacio está provisto de producto interno, por lo que es posible expresar
 $k(x,x') = \langle  \Phi(x), \Phi(x') \rangle_{l_2^{N_{\mathcal{H}}}}$ para casi todo $x \in \mathcal{X}$.
 Esto permite interpretar a $\Phi$ como una aplicación a un espacio de \textit{características},
 más aún, en este espacio $k(\cdot,\cdot)$ actúa como un producto interno, esto se
@@ -157,7 +157,7 @@ de funciones.
 
 \begin{definition}[Espacio de Hilbert con Kernel Reproductor]
 	\label{eq:6}
-Sea $\mathcal{X}$ conjunto no vacíoy $\mathcal{H}$ un espacio de Hilbert
+Sea $\mathcal{X}$ conjunto no vacío y $\mathcal{H}$ un espacio de Hilbert
 de funciones $f: \mathcal{X} \rightarrow \mathbb{R}$. Se denomina a
 $\mathcal{H}$ espacio de Hilbert con kernel reproductor con producto punto
 $\left \langle \cdot ,  \cdot \right \rangle $ (y por tanto la norma
@@ -175,7 +175,7 @@ con las siguientes propiedades.
 
 Por definición (punto 2), un RKHS es un espacio formado por combinaciones lineales
 de funciones de la forma $k_{x}(\cdot)$ para todo $x \in \mathcal{X}$ y sus funciones
-limite (clausura). Esto último quiere decir, que toda función $f \in \mathcal{H}$
+límite (clausura). Esto último quiere decir, que toda función $f \in \mathcal{H}$
 puede ser aproximada a través de sucesiones de combinaciones lineales de elementos
 de la forma $k_{x}(\cdot)$, que claramente están únicamente determinados por el
 kernel $k(\cdot, \cdot)$.
@@ -202,7 +202,7 @@ Como todo funcional de la forma $k_x(\cdot) = k(x,\cdot) \in \mathcal{H}$ y este
   &=f(x )
 \end{align}
 
-Donde en la primera ecuación se utiliza la otrogonalidad $\psi_i \perp \psi_j$ en todo $i \neq j$. Posteriormente, se redefine el producto
+Donde en la primera ecuación se utiliza la ortogonalidad $\psi_i \perp \psi_j$ en todo $i \neq j$. Posteriormente, se redefine el producto
 interno en $L_2{(\mathcal{X})}$ de manera que $\langle \psi_j , \psi_l \rangle = \delta_{ij}/\lambda_j$, finalmente se tiene que
 \footnote{$\delta_{ij} = 1$ si $i = j$, y $\delta_{ij} = 0$ en caso
 contrario. Este objeto matemático se conoce como \textit{delta de
@@ -224,7 +224,7 @@ el RKHS correspondiente.
 
 Por definición para cada espacio RKHS existe una función kernel, por el argumento
 anterior, se puede intuir la existencia de cierta relación de equivalencia entre
-los kernels que describen a un espacio RKHS. La respues a tal inquietud es aún más
+los kernels que describen a un espacio RKHS. La respuesta tal inquietud es aún más
 fuerte, pues establece que a cada RKHS corresponde una único kernel \cite{Aro1950}.
 
 \begin{theorem}[Moore-Aronszajn]
@@ -294,7 +294,7 @@ k \left(\bm{x},\bm{x'} \right)= \exp \left( - \frac{ \| \bm{x} -\bm{x'} \| ^2  }
 \end{equation}
 
 donde $\sigma$ Se conoce como \textbf{ancho de banda}. Las funciones
-del tipo (\ref{funcionradialbase}), se conocen como \textbf{funciones de base radial}, y se caracterizan por depender unicamente de la diferencia entre los puntos que opera, es decir, $k(\bm{x},\bm{x}') = k(\bm{x} - \bm{x}')$. Por este motivo el kernel de la ecuación
+del tipo (\ref{funcionradialbase}), se conocen como \textbf{funciones de base radial}, y se caracterizan por depender únicamente de la diferencia entre los puntos que opera, es decir, $k(\bm{x},\bm{x}') = k(\bm{x} - \bm{x}')$. Por este motivo el kernel de la ecuación
 (\ref{funcionradialbase}) se conoce como kernel RBF (Radial Basis
 Function).
 
@@ -349,7 +349,7 @@ donde $\rho>0$ y $p(\bm{x} | \bm{x_i})$ se aproxima por $p(\bm{x} |
 un parámetro estimado obtenido usando el dato $\bm{x_i}$. Este kernel
 es llamado \textbf{kernel producto de probabilidad} \cite{Jebara2004}.
 
-El modelo ajustado será usado para ver cuan similar son los objetos que
+El modelo ajustado será usado para ver cuán similar son los objetos que
 se operan. En particular, si se ajusta el modelo a $\bm{x_i}$ se desea
 que este sea capaz de indicar cuando otro dato $\bm{x_j}$ es similar.
 Si a modo de ejemplo, se supone $p(\bm{x}| \bm{\theta)}=\mathcal{N} (\mu , \sigma^2 \bm{I})$ donde $\sigma^2$ es fijo. Con $\rho=1$ y
@@ -382,13 +382,13 @@ corresponde esencialmente a la matriz Hessiana:
 \bm{F}= \nabla \nabla \log p(\bm{x} | \theta )|_{\widehat{\theta}}
 \end{equation*}
 
-Debido a que el estimador $\widehat{\theta}$ se obitne en función de
+Debido a que el estimador $\widehat{\theta}$ se obtiene en función de
 todos los datos, se tiene que similitud de $\bm{x}$ y $\bm{x'}$ es
 por tanto calculada usando todos los datos.
 
 Si $\bm{g}(\bm{x})$ es la dirección en la cual los datos $\bm{x}$
 condicionan el valor de $\widehat{\theta})$ al momento de maximizar la
-verosimilitud. Se desea considerar como similares a los puntos $\bm{x}$ y $\bm{x'}$ si las direcciones para el gradiente que condicionan la verosimilitud en $\theta$ son similares entre si.
+verosimilitud. Se desea considerar como similares a los puntos $\bm{x}$ y $\bm{x'}$ si las direcciones para el gradiente que condicionan la verosimilitud en $\theta$ son similares entre sí.
 
 \section{Kernels en modelos lineales generalizados}
 
@@ -410,7 +410,7 @@ enfoque, no se requiere que el kernel sea Mercer.
 
 Se puede usar el vector de características kernelizado entrenar un
 modelo de regresión logística definiendo $p(y| \bm{x} , \theta)= Ber(\bm{w}^\top \phi(\bm{x}) )$. Esta formulación permite definir
-bordes de descición no lineales de manera sencilla a traves de la elección del kernel.
+bordes de decisión no lineales de manera sencilla a través de la elección del kernel.
 
 De la misma forma, es posible usar el vector de características
 anterior para entrenar un modelo de regresión lineal al definir
@@ -418,13 +418,13 @@ $p(y| \bm{x} , \theta)= \mathcal{N} ( \bm{w}^\top \phi(\bm{x}) , \sigma^2 )$.
 
 \subsection{LIVMs, RVMs y Maquinas de vectores sparse}
 
-Al formular modelos basados en Maquinas de kernel, no se especifica la
-manera optima para la obtención de centroides $\mu_k$. Un enfoque
+Al formular modelos basados en Máquinas de kernel, no se especifica la
+manera óptima para la obtención de centroides $\mu_k$. Un enfoque
 consiste en encontrar clusters en los datos y luego asignarlos como
-prototipos. Sim embargo, no se puede garantizar que a través de esta
+prototipos. Sin embargo, no se puede garantizar que a través de esta
 búsqueda se encuentren representaciones convenientes para la
 predicción. A esto se suma la elección del número de clusters, que
-tampoco esta especificada. Otro enfoque es considerar hacer cada
+tampoco está especificada. Otro enfoque es considerar hacer cada
 elemento $\bm{x_i}$ como un prototipo, de esta forma se obtiene
 \begin{equation*}
 \bm{\phi}(\bm{x})=[ k( \bm{x} , \bm{x}_1),..., k (\bm{x} , \bm{x}_N)]
@@ -437,10 +437,10 @@ solo se resuelve el problema referente a la alta cantidad de
 parámetros, sino que también la dispersión inducida en el vector de
 características permite escoger aquellos puntos más relevantes,
 permitiendo seleccionar un subconjunto de los datos para predecir. Los
-modelos que hace uso de este principio se denominan \textbf{Maquinas de vectores sparse}.
+modelos que hace uso de este principio se denominan \textbf{Máquinas de vectores sparse}.
 
 En tal sentido, la elección más natural al momento de inducir
-dispersión es el uso de regularización $l_1$ \cite{Kri2005}. A la maquina de vectores resultante del uso de este regularizador para inducir dispersión se le denominará \textbf{LIVM}  (Maquina de vectores regularizada $l_1$) . Análogamente, el uso de  un regularizador $l_2$  da lugar a \textbf{L2VM} (máquina de vectores $l_2$-regularizada), en este último modelo no se induce dispersión (debido al tipo de regularización).
+dispersión es el uso de regularización $l_1$ \cite{Kri2005}. A la máquina de vectores resultante del uso de este regularizador para inducir dispersión se le denominará \textbf{LIVM}  (Maquina de vectores regularizada $l_1$) . Análogamente, el uso de  un regularizador $l_2$  da lugar a \textbf{L2VM} (máquina de vectores $l_2$-regularizada), en este último modelo no se induce dispersión (debido al tipo de regularización).
 
 Es también posible implementar el método ARD para inducir dispersión,
 el método resultante se denomina \textbf{Máquina de vectores de relevancia} o \textbf{RVM} \cite{Tip2001}.
@@ -448,7 +448,7 @@ el método resultante se denomina \textbf{Máquina de vectores de relevancia} o 
 Otra manera maquina de vector sparse los lo modelos conocidos como
 \textbf{máquinas de vectores de soporte} (SVM)
 
-\subsection{Maquinas de vectores de soporte (SVM)}
+\subsection{Máquinas de vectores de soporte (SVM)}
 
 Este m\'etodo se desarroll\'o para resolver problemas de
 clasificaci\'on y aproximaci\'on est\'atica de funciones \cite{Cor1995}
@@ -461,7 +461,7 @@ f(x)=w^T \varphi(x) + b
 \label{eq:1_svm}
 \end{equation}
 En este contexto, la aplicaci\'on $ \varphi: \mathbb{R}^n \rightarrow
-\mathbb{R}^{N_{\mathcal{H}}} $ corresponde la transformaci\'on de caracterisitcas
+\mathbb{R}^{N_{\mathcal{H}}} $ corresponde la transformaci\'on de características
 sobre los datos. El parametro $ w \in \mathbb{R}^{N_{\mathcal{H}}} $ corresponde a al vector de pesos asociado a la construcci\'on del modelo y cuya dimensi\'on depende directamente de $ \varphi $, pudiendo ser infinito dimensional.
 
 Se busca estimar minimizando el riesgo emp\'irico $ \textbf{R}_{emp}$  definido por:
@@ -470,7 +470,7 @@ Se busca estimar minimizando el riesgo emp\'irico $ \textbf{R}_{emp}$  definido 
 \textbf{R}_{emp}={\frac{1}{N} \sum_{i=1}^{N} \left| {y_i -w^T \varphi{(x_i)}-b} \right|_{\varepsilon}}
 \end{equation}
 
-Donde se emplea la funci\'on de perdida $ \varepsilon $-insensible de Vapnik, definida por:
+Donde se emplea la funci\'on de pérdida $ \varepsilon $-insensible de Vapnik, definida por:
 
 \begin{equation}
 \left| {y - f(x)} \right|_{\varepsilon}=
@@ -582,12 +582,12 @@ resultados obtenidos anteriormente, es posible reformular por medio de
 la herramienta conocida como el \textbf{truco del kernel}
 \cite{Hof2008}.
 
-El truco del kernel consiste en reemplazar el calculo de productos
+El truco del kernel consiste en reemplazar el cálculo de productos
 internos por una función kernel haciendo uso del resultado
 (\ref{eq:3}). En el caso de la formulación SVM, es posible reemplazar
 $\varphi(x_i)^T\varphi(x_j)$ por una función kernel de la forma
 $k(x_i,x_j) = \varphi(x_i)^T\varphi(x_j)$. La estructura de este kernel
-no se conoce a piori, esto pues la definición de $\varphi(\cdot)$ fue
+no se conoce a priori, esto pues la definición de $\varphi(\cdot)$ fue
 netamente teórica. Sin embargo, se sabe que su producto interno se
 puede representar por un kernel. La idea detrás de este método
 consiste en seleccionar un kernel de manera tal que las funciones base
@@ -616,10 +616,10 @@ f(x)=\sum_{i=1}^{N}(\alpha_i-\alpha^*_i)k(x_i,x)+b
 \end{equation}
 
 \subsection{LS-SVM}
-Una variante del método SVM es su versión basada en minimos cuadrados,
+Una variante del método SVM es su versión basada en mínimos cuadrados,
 la cual se formula como una alternativa más eficiente\cite{Suy2002}.
 
-Su formulaci\'on es similar a la expuesta en \ref{pr:problema_holgura}, considerando la formula habitual de regresi\'on presentada en (\ref{eq:1_svm}):
+Su formulaci\'on es similar a la expuesta en \ref{pr:problema_holgura}, considerando la fórmula habitual de regresi\'on presentada en (\ref{eq:1_svm}):
 \begin{equation}
 \label{pr:LSSVM_simple}
 \left \lbrack{
@@ -629,7 +629,7 @@ Su formulaci\'on es similar a la expuesta en \ref{pr:problema_holgura}, consider
 	\end{aligned}
 } \right \rbrack
 \end{equation}
-En esta nueva formulaci\'on, los t\'erminos de error $ e_i $ juegan un papel similar al de las variables de holgura $ \xi_i,~\xi^*_i $ en (\ref{pr:problema_holgura}), con excepci\'on de que la funci\'on de perdida que se aplica a estas variables es ahora cuadr\'atica. Se comienza entonces por establecer el Lagrangiano:
+En esta nueva formulaci\'on, los t\'erminos de error $ e_i $ juegan un papel similar al de las variables de holgura $ \xi_i,~\xi^*_i $ en (\ref{pr:problema_holgura}), con excepci\'on de que la funci\'on de pérdida que se aplica a estas variables es ahora cuadr\'atica. Se comienza entonces por establecer el Lagrangiano:
 
 \begin{equation}
 \label{eq:Lagrange_LS}
@@ -650,7 +650,7 @@ Donde los coeficientes $ \alpha_i $ son los multiplicadores de Lagrange. Las con
 \right.
 \end{equation}
 
-Al despejar $ w $, $ e_i $ y reemplazar en la ultima igualdad se obtiene:
+Al despejar $ w $, $ e_i $ y reemplazar en la última igualdad se obtiene:
 
 \begin{equation}
 \label{eq:pre_matriz}
@@ -730,7 +730,7 @@ donde
 d(i,i') \triangleq  \| \bm{x_i} - \bm{x_i'} \|_{2}^{2}
 \end{equation*}
 
-Esto toma $ O(n_k ^2)$ trabajo por cluster, mientras K-medias toma $O(n_k D)$ para actualizar cada cluster. En el algoritmo (\ref{alg:5}) se aprecia la estrucutra del método. Al calular el medoide más cercano a la clase, el problema se transforma en \textbf{clasificación medoide mas cercano}\cite{Has2009}
+Esto toma $ O(n_k ^2)$ trabajo por cluster, mientras K-medias toma $O(n_k D)$ para actualizar cada cluster. En el algoritmo (\ref{alg:5}) se aprecia la estructura del método. Al calular el medoide más cercano a la clase, el problema se transforma en \textbf{clasificación medoide mas cercano}\cite{Has2009}
 Este algoritmo puede ser kernelizado usando Ecuación (\ref{Eq:vecinomascercano}) para reemplazar la distancia $ d(i,i')$ .
 
 \begin{algorithm}
@@ -790,7 +790,7 @@ resume en el algoritmo \ref{alg:9}.
 
 \begin{algorithm}
 \DontPrintSemicolon
-\KwIn{$\bm{K}$ de tamaño $N \times N$, $\bm{K}_{*}$ de tamaño $N_{*}\times N$, numero de dimenciones latentes L}
+\KwIn{$\bm{K}$ de tamaño $N \times N$, $\bm{K}_{*}$ de tamaño $N_{*}\times N$, número de dimensiones latentes L}
 $\bm{O} = \mathbf { 1 } _{N} \mathbf { 1 }_{N}^T /N$ \;
 
 $\tilde{ \mathbf { K } } = \bm{K} - \bm{O}\bm{K} - \bm{K}\bm{O} + \bm{O}\bm{K}\bm{O}$\;
@@ -812,7 +812,7 @@ $Z = \tilde{ \mathbf { K } } \bm{V}(:,1:L)$;
 \section{Kernels para construir modelos generativos}
 
 Otra case kernels, conocidos como kernels de suavizado, permiten
-caracterizar estimaciones no paramétricas de desidades. Lo cual puede
+caracterizar estimaciones no paramétricas de densidades. Lo cual puede
 ser utilizado para generar estimaciones de densidades de manera no
 supervisada, así como también para crear modelos generativos tanto para
 regresión como para clasificación.
@@ -840,7 +840,7 @@ No obstante, en el caso del kernel gaussiano, el kernel de suavizado pasa a ser:
 \begin{equation*}
 k _ { h } ( \mathbf { x } ) = \frac { 1 } { h ^ { D } ( 2 \pi ) ^ { D / 2 } } \prod _ { j = 1 } ^ { D } \exp \left( - \frac { 1 } { 2 h ^ { 2 } } x _ { j } ^ { 2 } \right)
 \end{equation*}
-Si bien los kernels de la familia gausiana poseen propiedades que permiten simplicar el gasto computacional, su soporte no es acotado, por lo que en modelos reales carece de expresividad. Una alternatica a esto es el \textbf{kernel Epanechnikov}, el cual posee soporte compacto y esta definido por:
+Si bien los kernels de la familia gaussiana poseen propiedades que permiten simplificar el gasto computacional, su soporte no es acotado, por lo que en modelos reales carece de expresividad. Una alternativa a esto es el \textbf{kernel Epanechnikov}, el cual posee soporte compacto y está definido por:
 \begin{equation*}
 k ( x ) \triangleq \frac { 3 } { 4 } \left( 1 - x ^ { 2 } \right) \mathbb { I } ( | x | \leq 1 )
 \end{equation*}
@@ -871,7 +871,7 @@ Modelo conocido como estimador \textbf{Parzen window density} , o \textbf{estima
 
 \subsection{De KDE a KNN}
 
-Se puede usar KDE para definir las clases de densidades condicionales en un clasificador generativo.  Esto proporciona una derivación  alternativa  del clasificador KNN. En KDE con un kernel  boxcar se fijara el ancho de banda y se contará cuantos puntos caen dentro del hyper cubo centrado sobre cada dato. Si se modela el ancho de banda $h$ como un parámetro de modelo, se permite que el ancho de banda o volumen sea distinto para cada dato. Específicamente, se aumentará el volumen alrededor de $\bm{x}$ hasta encontrar $K$ datos, sin importar su clase. Sea el volumen resultante $V$ con $V(x)$ y $N_c(x)$ ejemplos de clase $c$ en tal volumen. Luego es posible estimar la densidad condicional la de clase de como sigue:
+Se puede usar KDE para definir las clases de densidades condicionales en un clasificador generativo.  Esto proporciona una derivación  alternativa  del clasificador KNN. En KDE con un kernel boxcar se fijará el ancho de banda y se contará cuantos puntos caen dentro del hípercubo centrado sobre cada dato. Si se modela el ancho de banda $h$ como un parámetro de modelo, se permite que el ancho de banda o volumen sea distinto para cada dato. Específicamente, se aumentará el volumen alrededor de $\bm{x}$ hasta encontrar $K$ datos, sin importar su clase. Sea el volumen resultante $V$ con $V(x)$ y $N_c(x)$ ejemplos de clase $c$ en tal volumen. Luego es posible estimar la densidad condicional la de clase de como sigue:
 \begin{equation*}
 p ( \mathbf { x } | y = c , \mathcal { D } ) = \frac { N _ { c } ( \mathbf { x } ) } { N _ { c } V ( \mathbf { x } ) }
 \end{equation*}
@@ -879,7 +879,7 @@ Donde $N_c$ es el número total de ejemplos en la clase $c$ en aquel conjunto de
 \begin{equation*}
 p ( y = c | \mathcal { D } ) = \frac { N _ { c } } { N }
 \end{equation*}
-Por lo tanto, la posterior de clase esta dada por:
+Por lo tanto, la posterior de clase está dada por:
 \begin{equation*}
 p ( y = c | \mathbf { x } , \mathcal { D } ) = \frac { \frac { N _ { c } ( \mathbf { x } ) } { N _ { c }V ( \mathbf { x } ) } \frac { N _ { c } } { N } } { \sum _ { c ^ { \prime } } \frac { N _ { c '}  ( \mathbf { x } ) } { { N _ { c ^ { \prime } }  V( \mathbf { x } ) }} \frac { N _ { c ^ { \prime } } } { N }  } = \frac { N _ { c } ( \mathbf { x } ) } { \sum _ { c ^ { \prime } } N _ { c ^{ \prime }  } ( \mathbf { x } ) } = \frac { N _ { c } ( \mathbf { x } ) } { K }
 \end{equation*}
@@ -909,14 +909,14 @@ Se puede reescribir el resultado anterior de la siguiente manera:
 \left.\begin{aligned} f ( \mathbf { x } ) & = \sum _ { i = 1 } ^ { N } w _ { i } ( \mathbf { x } ) y _ { i } \\ w _ { i } ( \mathbf { x } ) & \triangleq \frac { k _ { h } \left( \mathbf { x } - \mathbf { x } _ { i } \right) } { \sum _ { i ^ { \prime } = 1 } ^ { N } k _ { h } \left( \mathbf { x } - \mathbf { x } _ { i ^ { \prime } } \right) } \end{aligned} \right.
 \end{equation*}
 
-La prediccón es por tanto una suma ponderada de los resultados de los datos de entrenamiento, donde los pesos dependen de que tan similar es $\mathbf{ x }$ de los puntos de entrenamientos almacenados. Este método es llamado \textbf{regresión kernel}, \textbf{kernel suavizado} o el modelo \textbf{Nadaraya-Watson}.
+La predicción es por tanto una suma ponderada de los resultados de los datos de entrenamiento, donde los pesos dependen de qué tan similar es $\mathbf{ x }$ de los puntos de entrenamientos almacenados. Este método es llamado \textbf{regresión kernel}, \textbf{kernel suavizado} o el modelo \textbf{Nadaraya-Watson}.
 
 \subsection{Regresión localmente ponderada}
 Si se define $k _ { h } \left( \mathbf { x } - \mathbf { x } _ { i } \right) = k \left( \mathbf { x } , \mathbf { x } _ { i } \right)$ se puede reescribir la predicción hecha mediante regresiòn kernel como sigue
 \begin{equation*}
 \hat { f } \left( \mathbf { x } _ { * } \right) = \sum _ { i = 1 } ^ { N } y _ { i } \frac { k \left( \mathbf { x } _ { * } , \mathbf { x } _ { i } \right) } { \sum _ { i ^ { \prime } = 1 } ^ { N } k \left( \mathbf { x } _ { * } , \mathbf { x } _ { i ^ { \prime } } \right) }
 \end{equation*}
-Si en este caso $k \left( \mathbf { x } , \mathbf { x } _ { i } \right)$ fuera un kernel suavizado, se podrìa ignorar el termino normalización, en tal caso:
+Si en este caso $k \left( \mathbf { x } , \mathbf { x } _ { i } \right)$ fuera un kernel suavizado, se podría ignorar el término normalización, en tal caso:
 \begin{equation*}
 \hat { f } \left( \mathbf { x } _ { * } \right) = \sum _ { i = 1 } ^ { N } y _ { i } k \left( \mathbf { x } _ { * } , \mathbf { x } _ { i } \right)
 \end{equation*}
@@ -924,7 +924,7 @@ Este modelo consiste esencialmente en una función fija localmente constante. Es
 \begin{equation*}
 \min _ { \beta \left( \mathbf { x } _ { * } \right) } \sum _ { i = 1 } ^ { N } k \left( \mathbf { x } _ { * } , \mathbf { x } _ { i } \right) \left[ y _ { i } - \boldsymbol { \beta } \left( \mathbf { x } _ { * } \right) ^ { T } \boldsymbol { \phi } \left( \mathbf { x } _ { i } \right) \right] ^ { 2 }
 \end{equation*}
-donde $\phi ( \mathbf { x } ) = [ 1 , \mathbf { x } ]$. Esto es llamado \textbf{regresión ponderada localmente}. Un ejemplo de tal metodo es \textbf{LOESS} o \textbf{LOWES} que significa para  “locally-weighted scatterplot smoothing”.
+donde $\phi ( \mathbf { x } ) = [ 1 , \mathbf { x } ]$. Esto es llamado \textbf{regresión ponderada localmente}. Un ejemplo de tal método es \textbf{LOESS} o \textbf{LOWES} que significa para  “locally-weighted scatterplot smoothing”.
 Se puede calcular el parámetro $\boldsymbol { \beta } \left( \mathbf { x } _ { * } \right)$ para cada caso de test resolviendo el siguiente problema de mínimos cuadrados ponderados:
 \begin{equation*}
 \boldsymbol { \beta } \left( \mathbf { x } _ { * } \right) = \left( \mathbf { \Phi } ^ { T } \mathbf { D } \left( \mathbf { x } _ { * } \right) \mathbf { \Phi } \right) ^ { - 1 } \mathbf { \Phi } ^ { T } \mathbf { D } \left( \mathbf { x } _ { * } \right) \mathbf { y }
