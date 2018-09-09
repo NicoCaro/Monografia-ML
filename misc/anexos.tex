@@ -1,11 +1,10 @@
 % !TEX root = ../main.tex
 \documentclass[../main.tex]{subfiles}
-\chapter{Anexos}
 
-\subsection{T\'opicos de An\'alisis}
-\label{apdc:topicos}
+\chapter{T\'opicos de An\'alisis}
+%\setcounter{chapter}{}
 
-\subsubsection{Normas}
+\section{Normas}
 \label{padc:normas}
 
 Una norma sobre $\mathbb{R}^{n}$  es una funcion $ f(x): \mathbb{R}^{n} \rightarrow \mathbb{R} $ que satisface las siguientes propiedades:
@@ -31,7 +30,7 @@ En la pr\'actica, si no se especifica la norma $||x||$ se asume por la norma-2 $
 	$ cos (\theta)= \dfrac{x^{T} y}{{|| x ||}_{2} {|| y||}_{2}}$
 \end{center}
 
-\subsubsection{Cauchy Schwarz}
+\section{Cauchy Schwarz}
 \label{apdc:CS}
 
 Sea $ E $ un espacio vectorial real y sea $ \langle \cdot ,\cdot\rangle: E \rightarrow \mathbb{R} $ una funci\'on positiva, sim\'etrica  y bilinear, es decir:
@@ -64,7 +63,8 @@ Para todo $ x,y,z \in E $, $ \alpha \in \mathbb{R} $.  Se quiere demostrar que $
 
 	De la arbitrariedad de $ x,y \in E $ se concluye la afirmaci\'on buscada.
 \end{proof}
-\subsection{Tópicos de Teoría de la Medida}
+
+\chapter{Tópicos de Teoría de la Medida}
 
 \begin{definition}[medida]
 Sea $X$ un conjunto y $\mathcal{C} \subseteq \mathcal{P}(X)$ tal que $\varphi \in \mathcal{C}$. Una función:
@@ -117,7 +117,7 @@ Sea $\mathcal{C} \subseteq \mathcal{P}(X)$ tal que $\phi \in \mathcal{C}$. Una m
 \end{definition}
 
 
-\subsection{Funciones Simples}
+\section{Funciones Simples}
 \begin{definition}{(Función Simple)}
 	Sea $(X, \mathcal{T})$ un espacio medible. Una función:
 \begin{equation*}
@@ -136,7 +136,7 @@ f(x)=\sum_{i=1}^{n}a_{i}1_{A_i}(x)
 \end{definition}
 
 
-\subsection{Definición de la integral}
+\section{Definición de la integral}
 \begin{definition}{(Integral)}
 Sea $(X,\mathcal{T},\mu)$ un espacio de medida. Sea $f \in \xi_{+}$, digamos $f(x)=\sum_{i=1}^{n}a_{i}1_{A_i}(x)$, con $(A_i)_{i=1}^{n}$ partición medible de $X$. Se define la \textbf{integral} de $f$ como:
 \begin{equation*}
@@ -144,7 +144,7 @@ Sea $(X,\mathcal{T},\mu)$ un espacio de medida. Sea $f \in \xi_{+}$, digamos $f(
 \end{equation*}
 \end{definition}
 
-\subsection{Completitud de un espacio de medida}
+\section{Completitud de un espacio de medida}
 \begin{definition}{(Conjunto Despreciable)}
 	Sea $(X,\mathcal{T},\mu)$ un espacio de medida. Un conjunto $N \in \mathcal{P}(X)$ se dice que es un \textbf{despreciable} si:
 
@@ -163,7 +163,7 @@ Si $(X,\mathcal{T},\mu)$ un espacio de medida y  $p:X \rightarrow \left \lbrace 
 es un despreciable para $(X,\mathcal{T},\mu)$.
 \end{definition}
 
-\subsection{Probabilidad}
+\chapter{Probabilidad}
 
 Sea $( \Omega , \mathcal { B } , \mathbb { P } )$ espacio de probabilidades, donde :
 \begin{itemize}
@@ -249,12 +249,11 @@ Donde $ \delta _ { i }$ corresponde a la función delta dirac.
 
 \end{proposition}
 
-\subsection{T\'opicos de Optimizaci\'on}
+\chapter{T\'opicos de Optimizaci\'on}
 
-\subsubsection{Problema de Optimizaci\'on con Restricciones, Lagrangiano}
+\section{Problema de Optimizaci\'on con Restricciones, Lagrangiano}
 
 Sea el problema de optimizaci\'on con restricciones:
-
 
 \begin{align*}
 min ~~  & f(x) ~~ x \in \mathbb{R}^{n}\\
@@ -268,7 +267,7 @@ donde $f(x)$ es la funci\'on objetivo, $c_{i}$ con $ i =1,2,...,p$ son las funci
 \mathcal{L}(x,\lambda)= f(x) - \sum_{i} \lambda_{i} c_{i}(x)
 \end{equation*}
 
-\subsubsection{Condiciones KKT}
+\section{Condiciones KKT}
 \label{apdc:KKT}
 
 En un problema de optimizaci\'on con restricciones se tiene como condici\'on necesaria de primer orden lo siguiente:
@@ -287,7 +286,7 @@ El cual consiste en las llamadas condiciones de Karush-Kuhn-Tucker (KKT). Un pun
 
 Las Condiciones de segundo orden pueden ser expresadas en t\'erminos de la matriz Hessiana con respecto a $x$ del Lagrangiano $\nabla^{2}_x \mathcal{L}(x^{*},\lambda^{*})= \nabla^{2}f(x^{*})- \sum_{i}\lambda^{*}_{i}\nabla^{2} c_{i}(x^{*}) $.
 
-\subsubsection{Problema de Programaci\'on Cuadr\'atica}
+\section{Problema de Programaci\'on Cuadr\'atica}
 \label{apdc:QP}
 
 Un problema de programaci\'on cuadr\'atica es de la forma:

@@ -16,6 +16,7 @@
 % Modelos Graficos
 \usepackage{tikz}
 
+
 % Sub-figuras
 \usepackage[format=hang,singlelinecheck=0,font={sf,small},labelfont=normal]{subfig}
 \captionsetup[subfigure]{subrefformat=simple,labelformat=simple,listofformat=subsimple,justification=centering} %
@@ -89,6 +90,15 @@
 \end{figure}
 }
 
+% Anexos
+\usepackage[spanish]{babel}
+\usepackage{appendix}
+
+\addto\captionsspanish{%
+  \renewcommand\appendixname{Anexos}
+  \renewcommand\appendixpagename{Anexos}
+}
+
 % Insertar ecuaciones
 \newcommand{\toLatex}[1]{%
 \begin{framed}
@@ -126,12 +136,15 @@
 \subfile{./capitulos/cap1}
 \subfile{./capitulos/cap2}
 \subfile{./capitulos/cap3}
-\subfile{./capitulos/cap4}
+
+% Discusión
+\subfile{./misc/discusion}
 
 \backmatter
-\appendix
-\subfile{./capitulos/cap5}
+
 \subfile{./misc/biblio}
-%\subfile{./misc/index}
+
+\appendix
+\subfile{./misc/anexos}
 
 \end{document}
